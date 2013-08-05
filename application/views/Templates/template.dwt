@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="description" content="website description" />
+        <meta name="keywords" content="website keywords, website keywords" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <!-- TemplateBeginEditable name="doctitle" -->
+        <title>PRODOWN</title>
+        <!-- TemplateEndEditable -->
+        <!-- TemplateBeginEditable name="head" -->
+        <!-- TemplateEndEditable -->
+        <link href="../css/style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="main">
+            <header>
+              <div id="logo">
+                 
+              </div>
+              <nav>
+                <div id="menu_container">
+                  <ul class="sf-menu" id="nav">
+                    <li><?php echo anchor('welcome','Pagina  Inicial') ?></li>
+                    <li><a href="cadastro.php">Cadastro</a></li>
+                  </ul>
+                </div>
+              </nav>
+            </header>
+            <div id="site_content">
+              <div id="sidebar_container">
+                <div class="sidebar">
+                    <form>
+                      <h1>Login</h1>
+                      <div class="inset" href="../css/style.css" rel="stylesheet" type="text/css">
+                      <p>
+                        <label for="cpf">CPF</label>
+                        <input type="text" name="cpf" id="cpf">
+                      </p>
+                      <p>
+                        <label for="senha">SENHA</label>
+                        <input type="password" name="senha" id="senha">
+                      </p>
+                      </div>
+                      <p class="p-container">
+                        <span>Esqueceu sua senha?</span>
+                        <input type="submit" name="go" id="go" value="Entrar">
+                      </p>
+                    </form>
+                </div>
+              </div>
+              <div class="content"><!-- TemplateBeginEditable name="Content" -->Content<!-- TemplateEndEditable --></div>
+            </div>
+            <div id="scroll">
+              <a title="Scroll to the top" class="top" href="#"><img src="images/top.png" alt="top" /></a>
+            </div>
+            <footer>
+              <p>Copyright &copy; CSS3_grass | <a href="http://www.css3templates.co.uk">design from css3templates.co.uk</a></p>
+            </footer>
+        </div>
+    </body>
+</html>
