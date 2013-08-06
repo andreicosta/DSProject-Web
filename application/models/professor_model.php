@@ -46,6 +46,7 @@ class Professor_model extends CI_Model{
         $result = array('success' => 'Professor inserido com sucesso');
         return $result;
     }
+   
 }
 
 ?>

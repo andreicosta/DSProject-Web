@@ -35,7 +35,7 @@ class Admin extends CI_Controller {
         $estado = new Estado();
 
         $data = array('nome' => $nome, 'menus' => $menus, 'estados' => $estado->getEstados());
-
+        
         if (isset($_POST['estados'])) {
             if ($_POST['estados'] == 0) {
                 $CI = $this->get_instance();
@@ -50,6 +50,26 @@ class Admin extends CI_Controller {
                 $this->load->view('mostra_avaliacao', $data);
             }
         }
+    }
+    public function buscaProf(){
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
+            
+            $this->load->view(inserirPesqProf);
+            
+    }
+    public function procuraprof(){
+        // pega os dados com $_POST e manda pro model
+        $cpf = $_POST['cpf'];
+        $this->load->model('Admin_model');
+            $result = $this->Admin_model->findProfessor($cpf);
+            $this->load->view('mostrarPesqProf',$result);
+            
+        
+        
     }
 
 }
