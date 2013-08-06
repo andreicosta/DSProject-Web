@@ -20,6 +20,8 @@ class Menu extends CI_Controller {
             $cadastroEscola = anchor('escola/cadastro', 'Cadastrar Escola', '');
             $buscaAvaliacao = anchor('admin/buscarAvaliacao', 'Buscar Avaliacao', '');
             $logout = anchor('login/logout','Logout');
+            $buscaProf = anchor('admin/buscarProf' , 'Buscar Professor' , '');
+            
             return array('menu1' => $cadastroProfessor, 'menu2' => $cadastroEscola,'menu3' => $buscaAvaliacao,
                     'menu4'=>$logout);
         }

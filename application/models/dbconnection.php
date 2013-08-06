@@ -8,13 +8,16 @@ class DBConnection extends CI_Model{
     private $link = NULL;
 
     public function __construct() {
+       
         parent::__construct();
         mysql_set_charset('utf8');
-        $this->link = mysqli_connect('localhost', 'root', '');
+        $this->link = mysqli_connect('localhost', 'root', 'admin');
         
         if (!$this->link) {
             $this->session->set_flashdata('ConnectionError', 'Erro ao conectar ao Servidor');
             //redirect('welcome');
+        }  else {
+            echo 'bunda';
         }
 
         if (!mysqli_select_db($this->link, 'ProDown')) {
