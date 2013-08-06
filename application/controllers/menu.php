@@ -9,8 +9,11 @@ class Menu extends CI_Controller {
     public function getMenus($user) {
         if ($user == 'professor') {
             $enviarDados = anchor('upload', 'Fazer Upload', '');
+            $buscaTodosAluno = anchor('professor/mostrarAll', 'Busca Todos Aluno');
+            $buscaGenero = anchor('professor/buscarGenero', 'Busca Genero');
+            $buscaFaixaEtaria = anchor('professor/buscarFaixaEtaria', 'Busca Faixa Etária');
             $logout = anchor('login/logout','Logout');
-            return array('menu1' => $enviarDados,'menu2' => $logout);
+            return array('menu1' => $enviarDados,'menu2' => $buscaTodosAluno,'menu3' => $buscaGenero, 'menu4' => $buscaFaixaEtaria, 'menu5' => $logout, );
         }
         if ($user == "administrador") {
             $cadastroProfessor = anchor('professor/cadastro', 'Cadastrar Professor', '');

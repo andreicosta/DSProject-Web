@@ -45,8 +45,11 @@ class XMLParser extends CI_Controller {
 
             $temp = $this->session->userdata('loggedUser');
             $cpfProfessor = $temp['username'];
-
-            $escolaID = mysqli_fetch_array(mysqli_query($this->dbc->getLink(), "SELECT Escola_idEscola FROM Escola_Professor WHERE Professor_cpf = $cpfProfessor"))['Escola_idEscola'];
+            
+            $temp2 = mysqli_query($this->dbc->getLink(), "SELECT Escola_idEscola FROM Escola_Professor WHERE Professor_cpf = $cpfProfessor");
+            
+            $escolaID = mysqli_fetch_array($temp2);
+            $escolaID = $escolaID['Escola_idEscola'];
 
             /*$idAluno = mysqli_fetch_array(mysqli_query($this->dbc->getLink(), "SELECT MAX(idAluno) FROM Aluno"))['MAX(idAluno)'];
             //$idAluno += 1;
@@ -62,7 +65,7 @@ class XMLParser extends CI_Controller {
                 'telefone' => $telefone, 'celular' => $celular, 'email' => $email);
 
             $ret = $alunoCon->addAluno($dadosAluno);
-
+            $idAluno = 0;
             if (isset($ret['idAluno'])) {
                 $idAluno = $ret['idAluno'];
             }

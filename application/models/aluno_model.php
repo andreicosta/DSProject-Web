@@ -48,7 +48,10 @@ class Aluno_model extends CI_Model {
                 '$nomeMae', '$nomePai', '$telefone', '$celular', '$email')");
 
         if (!$result) {
-            $error = array('error' => 'Erro ao inserir aluno no banco de dados Prodown Aluno <br>');
+            $error = array('error' => "INSERT INTO Aluno (idAluno, Escola_idEscola, Professor_cpf,
+            nome, nascimento, genero, endereco, nomeDaMae, nomeDoPai, telefone, celular, email) VALUES
+            ($idAluno, $idEscola, '$cpfProfessor', '$nome', '$nascimento', '$genero', '$endereco',
+                '$nomeMae', '$nomePai', '$telefone', '$celular', '$email')");
             return $error;
             //$this->load->view('logado', $error);
         }

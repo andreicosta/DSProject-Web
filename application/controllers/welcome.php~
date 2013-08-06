@@ -7,12 +7,12 @@ class Welcome extends CI_Controller {
 
     private $login = NULL;
 
-    public function __construct() {
+    /*public function __construct() {
         parent::__construct();
         require_once 'application/controllers/login.php';
         require_once 'application/controllers/menu.php';
         $this->login = new Login();
-    }
+    }*/
 
     public function index() {
         $loggedUser = $this->session->userdata('loggedUser');
@@ -30,9 +30,8 @@ class Welcome extends CI_Controller {
 
     public function login() {
         if ($this->login->login($_POST['username'], $_POST['password'])) {
-            $logado = $this->login->getLoggedUser();
-            $nome = $logado['nome'];
-            $user = $logado['user'];
+            $nome = $this->login->getLoggedUser()['nome'];
+            $user = $this->login->getLoggedUser()['user'];
 
             $menu = new Menu();
             $menus = $menu->getMenus($user);

@@ -38,6 +38,9 @@
                 </div>
                 <div class="content">
                     <center><h1>Welcome to PRODOWN</h1></center>
+                    <?php if(isset($error)){
+                        echo $error;
+                    } ?>
                 </div>
             </div>
             <div id="scroll">

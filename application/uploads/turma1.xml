@@ -1,0 +1,63 @@
+<prodown_envio>
+<alunos><aluno>
+<nome>Aluno Um </nome>
+<nascimento>2004-08-02 </nascimento>
+<genero>Masculino </genero>
+<endereco>Rua dele </endereco>
+<cidade>Cidade/BR </cidade>
+<nome_mae>Nome da Mãe </nome_mae>
+<nome_pai> </nome_pai>
+<telefone> </telefone>
+<celular> </celular>
+<email> </email>
+<avaliacao>
+<data>2013-08-03 </data>
+<horario>15:00:00 </horario
+><temperatura>4 </temperatura>
+<massa_corporal>40.0 </massa_corporal>
+<estatura>130.0 </estatura>
+<imc>23.67 </imc>
+<envergadura>100.0 </envergadura>
+<abdominal>10 </abdominal>
+<sentar_e_alcancar>5.0 </sentar_e_alcancar>
+<banco>false </banco>
+<seis_minutos>100.0 </seis_minutos>
+<nove_minutos>-1.0 </nove_minutos>
+<salto_horizontal>100.0 </salto_horizontal>
+<arremesso_medicineball>150.0 </arremesso_medicineball>
+<quadrado>20.0 </quadrado>
+<corrida>25.0 </corrida>
+</avaliacao>
+</aluno>
+<aluno>
+<nome>Aluno Dois </nome>
+<nascimento>2004-08-06 </nascimento>
+<genero>Masculino </genero>
+<endereco>Rua do Bobos, 0 </endereco>
+<cidade>Cidade/RB </cidade>
+<nome_mae>Mão do Aluno </nome_mae>
+<nome_pai> </nome_pai>
+<telefone> </telefone>
+<celular> </celular>
+<email> </email>
+<avaliacao>
+<data>2013-08-02 </data>
+<horario>15:01:00 </horario
+><temperatura>5 </temperatura>
+<massa_corporal>35.0 </massa_corporal>
+<estatura>125.0 </estatura>
+<imc>22.4 </imc>
+<envergadura>150.0 </envergadura>
+<abdominal>15 </abdominal>
+<sentar_e_alcancar>30.0 </sentar_e_alcancar>
+<banco>true </banco>
+<seis_minutos>-1.0 </seis_minutos>
+<nove_minutos>30.0 </nove_minutos>
+<salto_horizontal>150.0 </salto_horizontal>
+<arremesso_medicineball>250.0 </arremesso_medicineball>
+<quadrado>20.0 </quadrado>
+<corrida>200.0 </corrida>
+</avaliacao>
+</aluno>
+</alunos>
+</prodown_envio>

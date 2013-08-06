@@ -30,19 +30,25 @@ class Upload extends CI_Controller {
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload()) {
-            $error = array('error' => $this->upload->display_errors());
-            $temp = $this->session->all_userdata();
-            $data = array('nome' => $temp['nome'], 'error' => $this->upload->display_errors());
+        $loggedUser = $this->session->userdata('loggedUser');
+        $nome = $loggedUser['nome'];
+        $user = $loggedUser['user'];
+        $menu = new Menu();
+        $menus = $menu->getMenus($user);
+        
+            $data = array('nome' => $nome, 'error' => $this->upload->display_errors(),'menus'=>$menus);
             $this->load->view('logado', $data);
         } else {
             //$temp = $this->session->all_userdata();
             //$data = array('nome'=>$temp['nome'],'upload_data' => $this->upload->data());
-            $fileName = $this->upload->data()['file_name'];
+            $fileName = $this->upload->data();
+            $fileName = $fileName['file_name'];
 
             $parser = new XMLParser();
             $parser->parse($fileName);
 
-            $data = array('nome' => $this->session->userdata('loggedUser')['nome'],'upload_data' => $this->upload->data());
+            $nome = $this->session->userdata('loggedUser');
+            $data = array('nome' => $nome['nome'],'upload_data' => $this->upload->data());
             $this->load->view('upload_success', $data);
         }
     }

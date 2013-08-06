@@ -1,0 +1,33 @@
+<prodown_envio>
+<alunos><aluno>
+<nome>Aluno Um Turma Dois </nome>
+<nascimento>2004-08-06 </nascimento>
+<genero>Feminino </genero>
+<endereco>rua dele </endereco>
+<cidade>city/RS </cidade>
+<nome_mae>Nome da Mãe </nome_mae>
+<nome_pai> </nome_pai>
+<telefone> </telefone>
+<celular> </celular>
+<email> </email>
+<avaliacao>
+<data>2013-08-03 </data>
+<horario>07:06:00 </horario
+><temperatura>15 </temperatura>
+<massa_corporal>50.0 </massa_corporal>
+<estatura>50.0 </estatura>
+<imc>2005.0 </imc>
+<envergadura>50.0 </envergadura>
+<abdominal>50 </abdominal>
+<sentar_e_alcancar>50.0 </sentar_e_alcancar>
+<banco>true </banco>
+<seis_minutos>50.0 </seis_minutos>
+<nove_minutos>-1.0 </nove_minutos>
+<salto_horizontal>50.0 </salto_horizontal>
+<arremesso_medicineball>50.0 </arremesso_medicineball>
+<quadrado>50.0 </quadrado>
+<corrida>50.0 </corrida>
+</avaliacao>
+</aluno>
+</alunos>
+</prodown_envio>

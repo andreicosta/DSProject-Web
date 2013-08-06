@@ -247,6 +247,7 @@
 		show_error('Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.');
 	}
 
+        //echo APPPATH.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().'.php';
 	include(APPPATH.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().'.php');
 
 	// Set a mark point for benchmarking
