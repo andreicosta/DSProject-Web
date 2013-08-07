@@ -11,7 +11,7 @@ class DBConnection extends CI_Model{
        
         parent::__construct();
         mysql_set_charset('utf8');
-        $this->link = mysqli_connect('localhost', 'root', 'pazzini');
+        $this->link = mysqli_connect('localhost', 'root', 'admin');
         
         if (!$this->link) {
             $this->session->set_flashdata('ConnectionError', 'Erro ao conectar ao Servidor');
@@ -20,7 +20,7 @@ class DBConnection extends CI_Model{
             //echo 'bunda';
         }
 
-        if (!mysqli_select_db($this->link, 'Prodown')) {
+        if (!mysqli_select_db($this->link, 'ProDown')) {
             $this->session->set_flashdata('ConnectionError', 'Erro ao conectar ao banco de dados Prodown');
             //redirect('welcome');
         }
