@@ -173,11 +173,12 @@ class Professor extends CI_Controller {
         if(isset($_POST['idAluno'])){
             $idAluno = $_POST['idAluno'];
         }
+        
         $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'idAluno' => $idAluno);
 
         $CI = $this->get_instance();
         $CI->load->model('professor_model');
-        $result = $CI->professor_model->getAluno($idAluno);
+        $result = $CI->professor_model->getAluno($data);
         $data['aval'] = $result;
         $this->load->view('mostraAluno_professor', $data);
     }

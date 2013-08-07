@@ -9,7 +9,7 @@ class Menu extends CI_Controller {
     public function getMenus($user) {
         if ($user == 'professor') {
             $enviarDados = anchor('upload', 'Fazer Upload', '');
-            $buscaTodosAluno = anchor('professor/mostrarAll', 'Busca Todos Aluno');
+            $buscaTodosAluno = anchor('professor/mostrarAll', 'Busca Todos Alunos');
             $buscaGenero = anchor('professor/buscarGenero', 'Busca por Genero');
             $buscaFaixaEtaria = anchor('professor/buscarFaixaEtaria', 'Busca por Faixa Etaria');
             $buscaAluno = anchor('professor/buscarAluno', 'Busca por Aluno ');
