@@ -110,9 +110,11 @@ class Professor_model extends CI_Model{
         $cpf = $dados['cpf'];
         $init = $_POST['init'];
         $final = $_POST['final'];
-        $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM
+        
+        echo $init, $final;
+        $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno
             INNER JOIN Escola_Professor AS EP ON EP.Professor_cpf = Aluno.Professor_cpf AND EP.Escola_idEscola = Aluno.Escola_idEscola
-            WHERE EP.Professor_cpf = '$cpf' AND Aluno.nascimento '$init' BETWEEN '$final'");
+            WHERE EP.Professor_cpf = '$cpf' AND Aluno.nascimento >= '$init' AND Aluno.nascimento <= '$final'");
         if (!$result) {
             $error = array('error' => 'Não foi possivel Buscar os dados.');
             return $error;
@@ -136,16 +138,6 @@ class Professor_model extends CI_Model{
         return $array;
     }
     
-    /*public function getClassificacao($dados){
-        $cpf = $dados['cpf'];
-        $result = mysqli_query($this->dbc->getLink(), "SELECT nome FROM Aluno AS A
-            INNER JOIN Escola_Professor AS EP ON EP.Professor_cpf = A.Professor_cpf AND EP.Escola_idEscola = A.Escola_idEscola
-            WHERE EP.Professor_cpf = '$cpf'");
-        if (!$result) {
-            $error = array('error' => 'Não foi possivel Buscar os dados.');
-            return $error;
-        }
-    }*/
     
     public function getAluno($dados){
         $cpf = $dados['cpf'];
@@ -155,13 +147,13 @@ class Professor_model extends CI_Model{
             FROM Avaliacao
             INNER JOIN Aluno ON Avaliacao.Aluno_idAluno = Aluno.idAluno
             INNER JOIN Escola_Professor AS EP ON EP.Escola_idEscola = Aluno.Escola_idEscola AND EP.Professor_cpf = Aluno.Professor_cpf
-            WHERE EP.Professor_cpf = '$cpf' AND EP.Escola_idEscola = * AND Aluno.idAluno = 'Aluno Um'
+            WHERE EP.Professor_cpf = '$cpf' AND EP.Escola_idEscola = * AND Aluno.idAluno = '$idAluno'
             ORDER BY data");
         $array = array();
         $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
         while ($row = mysqli_fetch_array($result)) {
             unset($temp);
-            $temp[] = 'Aluno Um';
+            $temp[] = $idAluno;
             $temp[] = $row['numAvaliacao'];
             $temp[] = $row['data'];
             $temp[] = $row['horario'];
