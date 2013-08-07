@@ -118,8 +118,16 @@ class Professor extends CI_Controller {
         $cpf = $loggedUser['username'];
         $menu = new Menu();
         $menus = $menu->getMenus($user);
-
-        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'genero' => $_POST['genero']);
+        
+        if(isset($_POST['Masculino'])){
+            $genero = 'Masculino';
+        }
+        else{
+            $genero = 'Feminino';
+        }
+        
+        echo $genero;
+        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'genero' => $genero);
 
         $CI = $this->get_instance();
         $CI->load->model('professor_model');

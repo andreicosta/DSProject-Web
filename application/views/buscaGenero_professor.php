@@ -42,11 +42,11 @@
                     <center>
                         <h1>Busca por Genero</h1>
                        <?php 
-                        echo form_open('professor/mostrarGenero');
-                        echo form_radio('Masculino', 'Masculino', $genero); echo form_label('Masculino', 'gender');
-                        echo form_radio('Feminino', 'Feminino', $genero); echo form_label('Feminino', 'gender');
-                        echo form_submit('', 'Buscar');
-                        echo form_close();
+                       echo form_open('professor/mostrarGenero');
+                       echo form_radio(array('name' => 'Masculino','value' => 'M','checked' => FALSE)), form_label('Masculino', 'gender');
+                       echo form_radio(array('name' => 'Feminino','value' => 'F','checked' => FALSE)); echo form_label('Feminino', 'gender');
+                       echo form_submit('', 'Buscar');
+                       echo form_close();
                        ?>
                     </center>
                 </div>
