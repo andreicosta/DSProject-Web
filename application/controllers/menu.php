@@ -10,10 +10,11 @@ class Menu extends CI_Controller {
         if ($user == 'professor') {
             $enviarDados = anchor('upload', 'Fazer Upload', '');
             $buscaTodosAluno = anchor('professor/mostrarAll', 'Busca Todos Aluno');
-            $buscaGenero = anchor('professor/buscarGenero', 'Busca Genero');
-            $buscaFaixaEtaria = anchor('professor/buscarFaixaEtaria', 'Busca Faixa Etária');
+            $buscaGenero = anchor('professor/buscarGenero', 'Busca por Genero');
+            $buscaFaixaEtaria = anchor('professor/buscarFaixaEtaria', 'Busca por Faixa Etaria');
+            $buscaAluno = anchor('professor/buscarAluno', 'Busca por Aluno ');
             $logout = anchor('login/logout','Logout');
-            return array('menu1' => $enviarDados,'menu2' => $buscaTodosAluno,'menu3' => $buscaGenero, 'menu4' => $buscaFaixaEtaria, 'menu5' => $logout, );
+            return array('menu1' => $enviarDados,'menu2' => $buscaTodosAluno,'menu3' => $buscaGenero, 'menu4' => $buscaFaixaEtaria, 'menu5' => $buscaAluno, 'menu6' => $logout );
         }
         if ($user == "administrador") {
             $cadastroProfessor = anchor('professor/cadastro', 'Cadastrar Professor', '');

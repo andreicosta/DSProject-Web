@@ -61,13 +61,13 @@ class Professor extends CI_Controller {
         $menu = new Menu();
         $menus = $menu->getMenus($user);
         
-        $data = array('nome' => $nome, 'menus' => $menus);
+        $data = array('nome' => $nome, 'menus' => $menus, 'genero' => 0);
 
 
         $this->load->view('buscaGenero_professor', $data);
     }
     
-    /*public function buscarFaixaEtaria() {
+    public function buscarFaixaEtaria() {
         $loggedUser = $this->session->userdata('loggedUser');
         $nome = $loggedUser['nome'];
         $user = $loggedUser['user'];
@@ -79,19 +79,6 @@ class Professor extends CI_Controller {
 
         $this->load->view('buscaFaixaEtaria_professor', $data);
     }
-    
-    public function buscarClassificacao() {
-        $loggedUser = $this->session->userdata('loggedUser');
-        $nome = $loggedUser['nome'];
-        $user = $loggedUser['user'];
-        $menu = new Menu();
-        $menus = $menu->getMenus($user);
-        
-        $data = array('nome' => $nome, 'menus' => $menus);
-
-
-        $this->load->view('buscaClassificacao_professor', $data);
-    }*/
     
     public function buscarAluno() {
         $loggedUser = $this->session->userdata('loggedUser');
@@ -128,62 +115,44 @@ class Professor extends CI_Controller {
         $loggedUser = $this->session->userdata('loggedUser');
         $nome = $loggedUser['nome'];
         $user = $loggedUser['user'];
-        $cpf = $loggedUser['cpf'];
+        $cpf = $loggedUser['username'];
         $menu = new Menu();
         $menus = $menu->getMenus($user);
 
-        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf);
+        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'genero' => $_POST['genero']);
 
+        $CI = $this->get_instance();
         $CI->load->model('professor_model');
-        $result = $CI->professor_model->getAll();
+        $result = $CI->professor_model->getGenero($data);
         $data['aval'] = $result;
         $this->load->view('mostraGenero_professor', $data);
     }
     
-    /*public function mostrarFaixaEtaria() {
+    public function mostrarFaixaEtaria() {
 
         $loggedUser = $this->session->userdata('loggedUser');
         $nome = $loggedUser['nome'];
         $user = $loggedUser['user'];
-        $cpf = $loggedUser['cpf'];
+        $cpf = $loggedUser['username'];
         $menu = new Menu();
         $menus = $menu->getMenus($user);
 
-        $estado = new Estado();
-
         $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf);
 
+        $CI = $this->get_instance();
         $CI->load->model('professor_model');
-        $result = $CI->professor_model->getAll();
+        $result = $CI->professor_model->getFaixaEtaria($data);
         $data['aval'] = $result;
-        $this->load->view('mostraFaixaEtaria_professor', $data);
+        $this->load->view('mostrarFaixaEtaria_professor', $data);
     }
     
-    public function mostrarClassificacao() {
-
-        $loggedUser = $this->session->userdata('loggedUser');
-        $nome = $loggedUser['nome'];
-        $user = $loggedUser['user'];
-        $cpf = $loggedUser['cpf'];
-        $menu = new Menu();
-        $menus = $menu->getMenus($user);
-
-        $estado = new Estado();
-
-        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf);
-
-        $CI->load->model('professor_model');
-        $result = $CI->professor_model->getAll();
-        $data['aval'] = $result;
-        $this->load->view('mostraClassificacao_professor', $data);
-    }*/
     
     public function mostrarAluno() {
 
         $loggedUser = $this->session->userdata('loggedUser');
         $nome = $loggedUser['nome'];
         $user = $loggedUser['user'];
-        $cpf = $loggedUser['cpf'];
+        $cpf = $loggedUser['username'];
         $menu = new Menu();
         $menus = $menu->getMenus($user);
 
@@ -191,8 +160,9 @@ class Professor extends CI_Controller {
 
         $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf);
 
+        $CI = $this->get_instance();
         $CI->load->model('professor_model');
-        $result = $CI->professor_model->getAll();
+        $result = $CI->professor_model->getAluno();
         $data['aval'] = $result;
         $this->load->view('mostraAluno_professor', $data);
     }
