@@ -52,26 +52,59 @@ class Admin extends CI_Controller {
         }
     }
     public function buscaProf(){
+            echo 'controler buscaProf()';
             $loggedUser = $this->session->userdata('loggedUser');
             $nome = $loggedUser['nome'];
             $user = $loggedUser['user'];
             $menu = new Menu();
             $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
             
-            $this->load->view(inserirPesqProf);
+            $this->load->view('inserirPesqProf',array('nome'=>$nome,'menus'=>$menus));
             
     }
+    
     public function procuraprof(){
         // pega os dados com $_POST e manda pro model
-        $cpf = $_POST['cpf'];
-        $this->load->model('Admin_model');
-            $result = $this->Admin_model->findProfessor($cpf);
-            $this->load->view('mostrarPesqProf',$result);
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
             
-        
+            $cpf = $_POST['cpf'];
+            $this->load->model('Admin_model');
+            echo 'TACHEGANDO AUQIIIIII BITCHH PLEASE';
+            $aux = $this->get_instance(); // isso aqui é um bug da linha 77 
+            $aux->load->model('Admin_model'); 
+            $result = $aux->Admin_model->findProfessor($cpf);
+            $this->load->view('mostrarPesqProf',array('result' =>$result, 'nome'=>$nome,'menus'=>$menus));
         
     }
 
+    public function buscagenero(){
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
+        
+            $this->load->view('adm_selectgenero',array('nome'=>$nome,'menus'=>$menus));
+    }
+    public function adm_filtragenero(){
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
+            
+            $opt = $_POST['myfilter'];
+            $aux = $this->get_instance();
+            $aux->load->model('Admin_model'); 
+            $result = $aux->Admin_model->adm_FindGender($opt);
+            $this->load->view('adm_mostrarPesqGender',array('result' =>$result, 'nome'=>$nome,'menus'=>$menus));
+            
+    }
+    
 }
 
 ?>
