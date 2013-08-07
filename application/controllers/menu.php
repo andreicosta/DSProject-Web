@@ -22,9 +22,11 @@ class Menu extends CI_Controller {
             $buscaAvaliacao = anchor('admin/buscarAvaliacao', 'Buscar Avaliacao', '');
             $logout = anchor('login/logout','Logout');
             $buscaProf = anchor('admin/buscarProf' , 'Buscar Professor' , '');
-            $buscagenero = anchor('admin/buscagenero','Busacar genero','');
+            $buscagenero = anchor('admin/buscagenero','Buscar genero','');
+            $buscaFaixaet = anchor('admin/buscafaixaet','Busca por faixa etaria' , '');
+            $buscaEscola =  anchor('admin/buscaEscola', 'Buscar por Escola','');
             return array('menu1' => $cadastroProfessor, 'menu2' => $cadastroEscola,'menu3' => $buscaAvaliacao,
-                    'menu4'=>$logout,'menu5'=>$buscagenero);
+                    'menu4'=>$logout,'menu5'=>$buscagenero, 'menu6'=>$buscaFaixaet,'menu7'=> $buscaEscola);
         }
     }
 

@@ -105,6 +105,57 @@ class Admin extends CI_Controller {
             
     }
     
+    public function buscafaixaet(){
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
+            
+            $this->load->view('adm_selectfaixa',array('nome'=>$nome,'menus'=>$menus));
+    }
+    
+    public function adm_filtrafaixa(){
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
+            
+            $opt = $_POST['myfilter'];
+            $aux = $this->get_instance();
+            $aux->load->model('Admin_model'); 
+            $result = $aux->Admin_model->adm_findFaixa($opt);
+            $this->load->view('adm_mostrarPesqGender',array('result' =>$result, 'nome'=>$nome,'menus'=>$menus));
+            
+    }
+    
+    public function buscaEscola(){
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
+            
+            $this->load->view('adm_buscaEscola',array('nome'=>$nome,'menus'=>$menus));
+    }
+    
+    
+    public function procuroAlunoEscola(){
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
+            
+            $nomeescola = $_POST['nome'];
+            $this->load->model('Admin_model');
+            $aux = $this->get_instance(); // isso aqui é um bug da linha 77 
+            $aux->load->model('Admin_model'); 
+            $result = $aux->Admin_model->findEscola($nomeescola);
+            $this->load->view('mostrarPesqProf',array('result' =>$result, 'nome'=>$nome,'menus'=>$menus));
+        
+    }
 }
 
 ?>

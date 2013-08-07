@@ -117,12 +117,19 @@ class Admin_model extends CI_Model {
         return $array;
     }
     public function adm_FindGender($opt){
-        //echo $opt ;
-       // $query =  "SELECT * FROM `Avaliacao` 
-         //          INNER JOIN `Aluno` ON (`Avaliacao`.`Aluno_idAluno` = `Aluno`.`idAluno`) 
-           //        WHERE `Aluno`.`genero` = $opt " ;
-        $query = "SELECT * FROM `Avaliacao` WHERE";
-        echo $query;
+        if($opt == "Feminino"){
+            echo 'Feminino';
+        }else{
+            echo 'MMMMMMMMMMMMMMMMMMMMMMMM';
+        }
+        $query = "SELECT Aluno.nome, Aluno.nascimento, Aluno.endereco, Aluno.email FROM Aluno
+            INNER JOIN Escola_Professor AS EP ON EP.Professor_cpf = Aluno.Professor_cpf AND EP.Escola_idEscola = Aluno.Escola_idEscola
+            WHERE EP.Professor_cpf = '$cpf' AND Aluno.genero =  Masculino ";
+        
+        /*$query = "SELECT * FROM ( Avaliacao 
+            INNER JOIN `Aluno` ON Avaliacao.Aluno_idAluno = Aluno.idAluno) AS A 
+            WHERE Aluno.genero = Masculino ";*/
+       
         $result = mysqli_query($this->dbc->getLink(), $query);
         
         $array = array();
@@ -152,6 +159,75 @@ class Admin_model extends CI_Model {
         return $array;
     }
     
+    
+    public function adm_findFaixa($opt){
+        
+        
+        echo 'ASIUDHIUAHDIUSHAIUDHIAUSHDIUHASIUDHUA';
+        $query = " SELECT * FROM Aluno 
+            WHERE Floor(DateDiff(d, Aluno.nascimento, GetDate()) / 365.25) = (int)$opt";
+        
+        $result = mysqli_query($this->dbc->getLink(), $query);
+        
+        $array = array();
+        $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
+        while ($row = mysqli_fetch_array($result)) {
+            unset($temp);
+            $temp[] = $row['nome'];
+            $temp[] = $row['numAvaliacao'];
+            $temp[] = $row['data'];
+            $temp[] = $row['horario'];
+            $temp[] = $row['temperatura'];
+            $temp[] = $row['massaCorporal'];
+            $temp[] = $row['estatura'];
+            $temp[] = $row['imc'];
+            $temp[] = $row['envergadura'];
+            $temp[] = $row['sentarEAlcancar'];
+            $temp[] = $row['sentarEAlcancarComBanco'];
+            $temp[] = $row['abdominal'];
+            $temp[] = $row['_9Minutos'];
+            $temp[] = $row['_6Minutos'];
+            $temp[] = $row['saltoHorizontal'];
+            $temp[] = $row['arremessoMedicineBall'];
+            $temp[] = $row['testeDoQuadrado'];
+            $temp[] = $row['corrida20Metros'];
+            $array[] = $temp;
+        }
+        return $array;
+       
+    }
+    public function findEscola($nomeescola){
+        $query = "SELECT * FROM `ProDown`.`Aluno` AS A 
+	INNER JOIN `Escola` AS E ON `E`.`idEscola` = `A`.`Escola_idEscola`" ;
+       
+         $result = mysqli_query($this->dbc->getLink(), $query);
+        $array = array();
+        $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
+        while ($row = mysqli_fetch_array($result)) {
+            unset($temp);
+            $temp[] = $row['nome'];
+            $temp[] = $row['numAvaliacao'];
+            $temp[] = $row['data'];
+            $temp[] = $row['horario'];
+            $temp[] = $row['temperatura'];
+            $temp[] = $row['massaCorporal'];
+            $temp[] = $row['estatura'];
+            $temp[] = $row['imc'];
+            $temp[] = $row['envergadura'];
+            $temp[] = $row['sentarEAlcancar'];
+            $temp[] = $row['sentarEAlcancarComBanco'];
+            $temp[] = $row['abdominal'];
+            $temp[] = $row['_9Minutos'];
+            $temp[] = $row['_6Minutos'];
+            $temp[] = $row['saltoHorizontal'];
+            $temp[] = $row['arremessoMedicineBall'];
+            $temp[] = $row['testeDoQuadrado'];
+            $temp[] = $row['corrida20Metros'];
+            $array[] = $temp;
+        }
+        return $array;
+        
+    }
 }
 
 ?>
