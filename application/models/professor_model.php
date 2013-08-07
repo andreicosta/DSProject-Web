@@ -78,21 +78,24 @@ class Professor_model extends CI_Model{
     
     public function getGenero($dados){
         $cpf = $dados['cpf'];
+        $genero = $dados['genero'];
+        echo $genero;
         $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.nascimento, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno
             INNER JOIN Escola_Professor AS EP ON EP.Professor_cpf = Aluno.Professor_cpf AND EP.Escola_idEscola = Aluno.Escola_idEscola
-            WHERE EP.Professor_cpf = '$cpf' AND Aluno.genero =  Masculino ");
+            WHERE EP.Professor_cpf = '$cpf' AND Aluno.genero = '$genero'");
         if (!$result) {
             $error = array('error' => 'Não foi possivel Buscar os dados.');
             return $error;
         }
         
         $array = array();
-        $array[] = array('Nome', 'Data de Nascimento', 'Endereço', 'Nome da Mae', 'Nome do Pai', 'Telefone','Celular', 'Email');
+        $array[] = array('Nome', 'Data de Nascimento', 'Endereço', 'Genero', 'Nome da Mae', 'Nome do Pai', 'Telefone','Celular', 'Email');
         while ($row = mysqli_fetch_array($result)) {
             unset($temp);
             $temp[] = $row['nome'];
             $temp[] = $row['nascimento'];
             $temp[] = $row['endereco'];
+            $temp[] = $genero;
             $temp[] = $row['nomeDaMae'];
             $temp[] = $row['nomeDoPai'];
             $temp[] = $row['telefone'];
@@ -109,7 +112,7 @@ class Professor_model extends CI_Model{
         $final = $_POST['final'];
         $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM
             INNER JOIN Escola_Professor AS EP ON EP.Professor_cpf = Aluno.Professor_cpf AND EP.Escola_idEscola = Aluno.Escola_idEscola
-            WHERE EP.Professor_cpf = '$cpf' AND Aluno.nascimento '$init' BETWEEN $final");
+            WHERE EP.Professor_cpf = '$cpf' AND Aluno.nascimento '$init' BETWEEN '$final'");
         if (!$result) {
             $error = array('error' => 'Não foi possivel Buscar os dados.');
             return $error;
@@ -148,13 +151,37 @@ class Professor_model extends CI_Model{
         $cpf = $dados['cpf'];
         $escola = $dados['escola'];
         $idAluno = $dados['idAluno'];
-        $result = mysqli_query($this->dbc->getLink(), "SELECT nome AS Nome FROM Aluno AS A
-	INNER JOIN Escola_Professor AS EP ON EP.Escola_idEscola = A.Escola_idEscola AND EP.Professor_cpf = A.Professor_cpf
-	WHERE EP.Professor_cpf = '$cpf' AND `EP`.`Escola_idEscola` = '$escola' AND A.idAluno = '$idAluno'");
-        if (!$result) {
-            $error = array('error' => 'Não foi possivel Buscar os dados.');
-            return $error;
+        $result = mysqli_query($this->dbc->getLink(), "SELECT Avaliacao.numAvaliacao, Avaliacao.data, Avaliacao.horario, Avaliacao.temperatura, Avaliacao.massaCorporal, Avaliacao.estatura, Avaliacao.imc, Avaliacao.envergadura, Avaliacao.sentarEAlcancar, Avaliacao.sentarEAlcancarComBanco, Avaliacao.abdominal, Avaliacao._9Minutos, Avaliacao._6Minutos, Avaliacao.saltoHorizontal, Avaliacao.arremessoMedicineBall, Avaliacao.testeDoQuadrado, Avaliacao.corrida20Metros
+            FROM Avaliacao
+            INNER JOIN Aluno ON Avaliacao.Aluno_idAluno = Aluno.idAluno
+            INNER JOIN Escola_Professor AS EP ON EP.Escola_idEscola = Aluno.Escola_idEscola AND EP.Professor_cpf = Aluno.Professor_cpf
+            WHERE EP.Professor_cpf = '$cpf' AND EP.Escola_idEscola = * AND Aluno.idAluno = 'Aluno Um'
+            ORDER BY data");
+        $array = array();
+        $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
+        while ($row = mysqli_fetch_array($result)) {
+            unset($temp);
+            $temp[] = 'Aluno Um';
+            $temp[] = $row['numAvaliacao'];
+            $temp[] = $row['data'];
+            $temp[] = $row['horario'];
+            $temp[] = $row['temperatura'];
+            $temp[] = $row['massaCorporal'];
+            $temp[] = $row['estatura'];
+            $temp[] = $row['imc'];
+            $temp[] = $row['envergadura'];
+            $temp[] = $row['sentarEAlcancar'];
+            $temp[] = $row['sentarEAlcancarComBanco'];
+            $temp[] = $row['abdominal'];
+            $temp[] = $row['_9Minutos'];
+            $temp[] = $row['_6Minutos'];
+            $temp[] = $row['saltoHorizontal'];
+            $temp[] = $row['arremessoMedicineBall'];
+            $temp[] = $row['testeDoQuadrado'];
+            $temp[] = $row['corrida20Metros'];
+            $array[] = $temp;
         }
+        return $array;
     }
     
 }
