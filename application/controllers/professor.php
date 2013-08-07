@@ -145,7 +145,13 @@ class Professor extends CI_Controller {
         $menu = new Menu();
         $menus = $menu->getMenus($user);
 
-        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf);
+        if(isset($_POST['init'])){
+            $init = $_POST['init'];
+        }
+        if(isset($_POST['final'])){
+            $final = $_POST['final'];
+        }
+        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'init' => $init, 'final' => $final );
 
         $CI = $this->get_instance();
         $CI->load->model('professor_model');
@@ -164,13 +170,14 @@ class Professor extends CI_Controller {
         $menu = new Menu();
         $menus = $menu->getMenus($user);
 
-        $aluno = new Aluno();
-
-        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf);
+        if(isset($_POST['idAluno'])){
+            $idAluno = $_POST['idAluno'];
+        }
+        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'idAluno' => $idAluno);
 
         $CI = $this->get_instance();
         $CI->load->model('professor_model');
-        $result = $CI->professor_model->getAluno();
+        $result = $CI->professor_model->getAluno($idAluno);
         $data['aval'] = $result;
         $this->load->view('mostraAluno_professor', $data);
     }
