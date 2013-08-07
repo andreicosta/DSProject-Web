@@ -120,8 +120,8 @@ class Admin_model extends CI_Model {
     public function adm_FindGender($dados){
         $cpf = $dados['cpf'];
         $genero = $dados['genero'];
-       
-        $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.nascimento, Aluno.endereco, Aluno.email FROM Aluno WHERE  Aluno.genero = $genero ");
+        
+        $result = mysqli_query($this->dbc->getLink(),"SELECT Aluno.nome, Aluno.nascimento, Aluno.endereco, Aluno.email FROM Aluno WHERE  Aluno.genero = '$genero'");
         
         $array = array();
         $array[] = array('Nome', 'nascimento', 'endereco', 'email');
@@ -138,11 +138,11 @@ class Admin_model extends CI_Model {
     
     
     public function adm_findFaixa($opt){
-        
-        
-        echo 'ASIUDHIUAHDIUSHAIUDHIAUSHDIUHASIUDHUA';
-        $query = " SELECT * FROM Aluno 
-            WHERE Floor(DateDiff(d, Aluno.nascimento, GetDate()) / 365.25) = (int)$opt";
+        $num = 0;
+        $num = (integer)$opt;
+       
+        $query = " SELECT Aluno.nome, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.email FROM Aluno 
+            WHERE Floor(DateDiff(day, Aluno.nascimento, GETDATE()) / 365.25) = '11'";
         
         $result = mysqli_query($this->dbc->getLink(), $query);
         
@@ -174,32 +174,18 @@ class Admin_model extends CI_Model {
        
     }
     public function findEscola($nomeescola){
-        $query = "SELECT * FROM `ProDown`.`Aluno` AS A 
-	INNER JOIN `Escola` AS E ON `E`.`idEscola` = `A`.`Escola_idEscola`" ;
+        echo $nomeescola;
+        $query = "SELECT "; 
        
-         $result = mysqli_query($this->dbc->getLink(), $query);
+        $result = mysqli_query($this->dbc->getLink(), $query);
         $array = array();
-        $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
+        $array[] = array('Nome', 'nascimento', 'endereco', 'email');
         while ($row = mysqli_fetch_array($result)) {
             unset($temp);
             $temp[] = $row['nome'];
-            $temp[] = $row['numAvaliacao'];
-            $temp[] = $row['data'];
-            $temp[] = $row['horario'];
-            $temp[] = $row['temperatura'];
-            $temp[] = $row['massaCorporal'];
-            $temp[] = $row['estatura'];
-            $temp[] = $row['imc'];
-            $temp[] = $row['envergadura'];
-            $temp[] = $row['sentarEAlcancar'];
-            $temp[] = $row['sentarEAlcancarComBanco'];
-            $temp[] = $row['abdominal'];
-            $temp[] = $row['_9Minutos'];
-            $temp[] = $row['_6Minutos'];
-            $temp[] = $row['saltoHorizontal'];
-            $temp[] = $row['arremessoMedicineBall'];
-            $temp[] = $row['testeDoQuadrado'];
-            $temp[] = $row['corrida20Metros'];
+            $temp[] = $row['nascimento'];
+            $temp[] = $row['endereco'];
+            $temp[] = $row['email'];
             $array[] = $temp;
         }
         return $array;

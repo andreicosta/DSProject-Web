@@ -131,6 +131,8 @@ class Admin extends CI_Controller {
             $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
             
             $opt = $_POST['myfilter'];
+            
+            
             $aux = $this->get_instance();
             $aux->load->model('Admin_model'); 
             $result = $aux->Admin_model->adm_findFaixa($opt);
