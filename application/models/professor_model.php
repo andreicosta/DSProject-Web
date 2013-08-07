@@ -108,8 +108,8 @@ class Professor_model extends CI_Model{
  
     public function getFaixaEtaria($dados){
         $cpf = $dados['cpf'];
-        $init = $_POST['init'];
-        $final = $_POST['final'];
+        $init = $dados['init'];
+        $final = $dados['final'];
         
         echo $init, $final;
         $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno
@@ -143,17 +143,20 @@ class Professor_model extends CI_Model{
         $cpf = $dados['cpf'];
         $escola = $dados['escola'];
         $idAluno = $dados['idAluno'];
-        $result = mysqli_query($this->dbc->getLink(), "SELECT Avaliacao.numAvaliacao, Avaliacao.data, Avaliacao.horario, Avaliacao.temperatura, Avaliacao.massaCorporal, Avaliacao.estatura, Avaliacao.imc, Avaliacao.envergadura, Avaliacao.sentarEAlcancar, Avaliacao.sentarEAlcancarComBanco, Avaliacao.abdominal, Avaliacao._9Minutos, Avaliacao._6Minutos, Avaliacao.saltoHorizontal, Avaliacao.arremessoMedicineBall, Avaliacao.testeDoQuadrado, Avaliacao.corrida20Metros
+        
+        $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Avaliacao.numAvaliacao, Avaliacao.data, Avaliacao.horario, Avaliacao.temperatura, Avaliacao.massaCorporal, Avaliacao.estatura, Avaliacao.imc, Avaliacao.envergadura, Avaliacao.sentarEAlcancar, Avaliacao.sentarEAlcancarComBanco, Avaliacao.abdominal, Avaliacao._9Minutos, Avaliacao._6Minutos, Avaliacao.saltoHorizontal, Avaliacao.arremessoMedicineBall, Avaliacao.testeDoQuadrado, Avaliacao.corrida20Metros
             FROM Avaliacao
             INNER JOIN Aluno ON Avaliacao.Aluno_idAluno = Aluno.idAluno
             INNER JOIN Escola_Professor AS EP ON EP.Escola_idEscola = Aluno.Escola_idEscola AND EP.Professor_cpf = Aluno.Professor_cpf
-            WHERE EP.Professor_cpf = '$cpf' AND EP.Escola_idEscola = * AND Aluno.idAluno = '$idAluno'
+            WHERE EP.Professor_cpf = '$cpf' AND EP.Escola_idEscola = '*' AND Aluno.idAluno = '$idAluno'
             ORDER BY data");
+        
+        
         $array = array();
         $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
         while ($row = mysqli_fetch_array($result)) {
             unset($temp);
-            $temp[] = $idAluno;
+            $temp[] = $row['nome'];
             $temp[] = $row['numAvaliacao'];
             $temp[] = $row['data'];
             $temp[] = $row['horario'];
