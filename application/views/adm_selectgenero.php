@@ -40,14 +40,17 @@
                 </div>
                 <div class="content">
                     <center>
-                        <h1>Procura Professor </h1>
+                        <h1>Pesquisa Genero </h1>
                         <?php
-                        echo 'INSERIR PESQUISA professor';
-                        echo form_open('admin/procuraprof');
-                        echo form_label('CPF');
-                        echo form_input(array('name'=>'cpf'),'','autofocus');
-                        
-                        echo form_submit('cadastrar','Cadastrar Professor');
+                        echo 'Selecione genero';
+                        echo form_open('admin/adm_filtragenero');
+                        echo form_label('Genero');
+                        $options = array(    
+                                       'Feminino'    => 'Feminino',
+                                       'Masculino'   => 'Masculino',
+                                   );
+                        echo form_dropdown('myfilter', $options, 'Feminino');                          
+                            echo form_submit('filtrargenero','Enter');
                         echo form_close();
                         ?>
                         <script>
