@@ -45,12 +45,9 @@
                         echo 'Selecione genero';
                         echo form_open('admin/adm_filtragenero');
                         echo form_label('Genero');
-                        $options = array(    
-                                       'Feminino'    => 'Feminino',
-                                       'Masculino'   => 'Masculino',
-                                   );
-                        echo form_dropdown('myfilter', $options, 'Feminino');                          
-                            echo form_submit('filtrargenero','Enter');
+                        echo form_radio(array('name' => 'Masculino','value' => 'M','checked' => FALSE)), form_label('Masculino', 'gender');
+                        echo form_radio(array('name' => 'Feminino','value' => 'F','checked' => FALSE)); echo form_label('Feminino', 'gender');
+                        echo form_submit('', 'Buscar');
                         echo form_close();
                         ?>
                         <script>

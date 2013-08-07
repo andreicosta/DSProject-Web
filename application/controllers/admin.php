@@ -94,13 +94,21 @@ class Admin extends CI_Controller {
             $loggedUser = $this->session->userdata('loggedUser');
             $nome = $loggedUser['nome'];
             $user = $loggedUser['user'];
+            $cpf = $loggedUser['username'];
             $menu = new Menu();
             $menus = $menu->getMenus($user); // tem que adicionar o link para o botao
             
-            $opt = $_POST['myfilter'];
+             if(isset($_POST['Masculino'])){
+                    $genero = 'Masculino';
+            }
+            else{
+                $genero = 'Feminino';
+            }
+            
+            $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'genero' => $genero);
             $aux = $this->get_instance();
             $aux->load->model('Admin_model'); 
-            $result = $aux->Admin_model->adm_FindGender($opt);
+            $result = $aux->Admin_model->adm_FindGender($data);
             $this->load->view('adm_mostrarPesqGender',array('result' =>$result, 'nome'=>$nome,'menus'=>$menus));
             
     }
