@@ -34,7 +34,7 @@ class Estado extends CI_Controller {
         $cidades = array();
         while ($row = mysqli_fetch_array($result)) {
             $cidades[$row['idCidade']] = $row['nome'];
-        }https://github.com/andrei529/DSProject-Web.git
+        }
         echo json_encode($cidades);
     }
     
