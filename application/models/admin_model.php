@@ -138,47 +138,39 @@ class Admin_model extends CI_Model {
     
     
     public function adm_findFaixa($opt){
-        $num = 0;
-        $num = (integer)$opt;
-       
         $query = " SELECT Aluno.nome, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.email FROM Aluno 
-            WHERE Floor(DateDiff(day, Aluno.nascimento, GETDATE()) / 365.25) = '11'";
+            WHERE (YEAR(CURDATE())- YEAR(Aluno.nascimento)) - (RIGHT(CURDATE(),5)< RIGHT(Aluno.nascimento,5)) = '$opt'"; 
+            //(Floor(datediff(d, Aluno.nascimento, getdate()) / 365.25)) = '$opt'";
         
         $result = mysqli_query($this->dbc->getLink(), $query);
         
         $array = array();
-        $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
+        $array[] = array('Nome','nascimento', 'genero', 'endereco', 'email');
         while ($row = mysqli_fetch_array($result)) {
             unset($temp);
             $temp[] = $row['nome'];
-            $temp[] = $row['numAvaliacao'];
-            $temp[] = $row['data'];
-            $temp[] = $row['horario'];
-            $temp[] = $row['temperatura'];
-            $temp[] = $row['massaCorporal'];
-            $temp[] = $row['estatura'];
-            $temp[] = $row['imc'];
-            $temp[] = $row['envergadura'];
-            $temp[] = $row['sentarEAlcancar'];
-            $temp[] = $row['sentarEAlcancarComBanco'];
-            $temp[] = $row['abdominal'];
-            $temp[] = $row['_9Minutos'];
-            $temp[] = $row['_6Minutos'];
-            $temp[] = $row['saltoHorizontal'];
-            $temp[] = $row['arremessoMedicineBall'];
-            $temp[] = $row['testeDoQuadrado'];
-            $temp[] = $row['corrida20Metros'];
+            $temp[] = $row['nascimento'];
+            $temp[] = $row['genero'];
+            $temp[] = $row['endereco'];
+            $temp[] = $row['email'];
             $array[] = $temp;
         }
         return $array;
        
     }
     public function findEscola($nomeescola){
-        echo $nomeescola;
-        $query = "SELECT "; 
-       
+        //echo $nomeescola;
+        $query = "SELECT Escola.idEscola FROM Escola Where Escola.nome = '$nomeescola'"; 
         $result = mysqli_query($this->dbc->getLink(), $query);
-        $array = array();
+        
+        
+        $row = mysqli_fetch_array($result);
+        $id = $row['idEscola'];
+        
+        $queryi = "SELECT Aluno.nome, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.email FROM Aluno
+            WHERE Aluno.Escola_idEscola = '$id'";
+        
+        $result = mysqli_query($this->dbc->getLink(), $queryi);
         $array[] = array('Nome', 'nascimento', 'endereco', 'email');
         while ($row = mysqli_fetch_array($result)) {
             unset($temp);
@@ -189,8 +181,8 @@ class Admin_model extends CI_Model {
             $array[] = $temp;
         }
         return $array;
-        
     }
+    
+    
 }
-
 ?>
