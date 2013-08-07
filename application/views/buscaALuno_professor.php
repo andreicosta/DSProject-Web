@@ -40,13 +40,11 @@
                 </div>
                 <div class="content">
                     <center>
-                        <h1>Busca por Faixa Etaria</h1>
+                        <h1>Busca por Aluno</h1>
                        <?php 
-                        echo form_open('professor/mostrarFaixaEtaria');
-                        echo form_label('inicio');
-                        echo form_input(array('name' => 'init'), '', 'autofocus');
-                        echo form_label('fim');
-                        echo form_input(array('name' => 'final'), '', '');
+                        echo form_open('professor/mostrarAluno');
+                        echo form_label('idAluno');
+                        echo form_input(array('name' => 'idAluno'), '', 'autofocus');
                         echo form_submit('','Buscar');
                         echo form_close();
                        ?>

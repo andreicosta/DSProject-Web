@@ -49,7 +49,7 @@ class Professor_model extends CI_Model{
     
     public function getAll($dados){
         $cpf = $dados['cpf'];
-        $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno
+        $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.idAluno, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno
             INNER JOIN Escola_Professor AS EP ON EP.Professor_cpf = Aluno.Professor_cpf AND EP.Escola_idEscola = Aluno.Escola_idEscola
             WHERE EP.Professor_cpf = '$cpf'");
         if (!$result) {
@@ -58,10 +58,11 @@ class Professor_model extends CI_Model{
         }
         
         $array = array();
-        $array[] = array('Nome', 'Data de Nascimento', 'Genero', 'Endereço', 'Nome da Mae', 'Nome do Pai', 'Telefone','Celular', 'Email');
+        $array[] = array('Nome', 'IdAluno', 'Data de Nascimento', 'Genero', 'Endereço', 'Nome da Mae', 'Nome do Pai', 'Telefone','Celular', 'Email');
         while ($row = mysqli_fetch_array($result)) {
             unset($temp);
             $temp[] = $row['nome'];
+            $temp[] = $row['idAluno'];
             $temp[] = $row['nascimento'];
             $temp[] = $row['genero'];
             $temp[] = $row['endereco'];
@@ -141,16 +142,17 @@ class Professor_model extends CI_Model{
     
     public function getAluno($dados){
         $cpf = $dados['cpf'];
-        $escola = $dados['escola'];
         $idAluno = $dados['idAluno'];
         
         $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Avaliacao.numAvaliacao, Avaliacao.data, Avaliacao.horario, Avaliacao.temperatura, Avaliacao.massaCorporal, Avaliacao.estatura, Avaliacao.imc, Avaliacao.envergadura, Avaliacao.sentarEAlcancar, Avaliacao.sentarEAlcancarComBanco, Avaliacao.abdominal, Avaliacao._9Minutos, Avaliacao._6Minutos, Avaliacao.saltoHorizontal, Avaliacao.arremessoMedicineBall, Avaliacao.testeDoQuadrado, Avaliacao.corrida20Metros
             FROM Avaliacao
             INNER JOIN Aluno ON Avaliacao.Aluno_idAluno = Aluno.idAluno
-            INNER JOIN Escola_Professor AS EP ON EP.Escola_idEscola = Aluno.Escola_idEscola AND EP.Professor_cpf = Aluno.Professor_cpf
-            WHERE EP.Professor_cpf = '$cpf' AND EP.Escola_idEscola = '*' AND Aluno.idAluno = '$idAluno'
+            WHERE Aluno.Professor_cpf = '$cpf' AND Aluno.idAluno = '$idAluno'
             ORDER BY data");
-        
+        if (!$result) {
+            $error = array('error' => 'Não foi possivel Buscar os dados.');
+            return $error;
+        }
         
         $array = array();
         $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
