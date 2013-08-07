@@ -11,7 +11,7 @@ class DBConnection extends CI_Model{
        
         parent::__construct();
         mysql_set_charset('utf8');
-        $this->link = mysqli_connect('localhost', 'root', 'admin');
+        $this->link = mysqli_connect('localhost', 'root', '');
         
         if (!$this->link) {
             $this->session->set_flashdata('ConnectionError', 'Erro ao conectar ao Servidor');
