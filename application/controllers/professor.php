@@ -145,12 +145,12 @@ class Professor extends CI_Controller {
         $menu = new Menu();
         $menus = $menu->getMenus($user);
 
-        if(isset($_POST['init'])){
-            $init = $_POST['init'];
+        if(isset($_POST['idade'])){
+            $idade = $_POST['idade'];
         }
-        if(isset($_POST['final'])){
-            $final = $_POST['final'];
-        }
+        $init = 2013 - $idade;
+        $final = $init+1;
+        echo $init, $final;
         $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'init' => $init, 'final' => $final );
 
         $CI = $this->get_instance();

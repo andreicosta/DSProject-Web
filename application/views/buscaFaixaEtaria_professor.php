@@ -43,10 +43,8 @@
                         <h1>Busca por Faixa Etaria</h1>
                        <?php 
                         echo form_open('professor/mostrarFaixaEtaria');
-                        echo form_label('Ano inicio');
-                        echo form_input(array('name' => 'init'), '', 'autofocus');
-                        echo form_label('Ano fim');
-                        echo form_input(array('name' => 'final'), '', '');
+                        echo form_label('Faixa Etaria(Idade)');
+                        echo form_input(array('name' => 'idade'), '', 'autofocus');
                         echo form_submit('','Buscar');
                         echo form_close();
                        ?>
