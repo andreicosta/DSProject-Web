@@ -68,12 +68,47 @@ class Escola extends CI_Controller {
 
             //$CI = $this->get_instance();
             $estado = new Estado();
-            
+
 
             $data = array('nome' => $nome, 'menus' => $menus, 'estados' => $estado->getEstados(),
-                'validation'=> $temp);
+                'validation' => $temp);
             $this->form_validation->run();
             $this->load->view('cadastro_escola', $data);
+        }
+    }
+
+    public function solicita() {
+        $estado = new Estado();
+        if (isset($_POST['nome'])) {
+            $nome = $_POST['nome'];
+            $cnpj = $_POST['cnpj'];
+            $telefone = $_POST['telefone'];
+            $email = $_POST['email'];
+            $idEstado = $_POST['estados'];
+            $idCidade = $_POST['cidades'];
+
+            $message = "Nome: $nome\r\n
+                    CNPJ: $cnpj\r\n
+                    Telefone: $telefone\r\n
+                    Email: $email\r\n
+                    Estado: $idEstado\r\n
+                    Cidade: $idCidade";
+
+            $message = wordwrap($message, 200, "\r\n");
+
+            #mail('pazzinivinicius@gmail.com', 'Cadastro de Esocola', $message);
+
+            $to = "pazzinivinicius@gmail.com";
+            $subject = "Test mail";
+            $from = "prodown@example.com";
+            $headers = "From:" . $from;
+            mail($to,$subject,$message,$headers);
+            
+            $data = array('validation' => "Solicitação Enviada com Sucesso",'estados'=>$estado->getEstados());
+            $this->load->view('cadastro', $data);
+        } else {
+            $data = array('validation' => "Erro",'estados'=>$estado->getEstados());
+            $this->load->view('cadastro',$data);
         }
     }
 

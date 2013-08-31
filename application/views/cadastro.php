@@ -1,15 +1,13 @@
 <!doctype html>
 <html><!-- InstanceBegin template="/Templates/template.dwt" codeOutsideHTMLIsLocked="false" -->
     <head>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script type='text/javascript' src="<?php echo base_url(); ?>latinise_min.js"></script>
         <meta name="description" content="website description" />
         <meta name="keywords" content="website keywords, website keywords" />
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <!-- InstanceBeginEditable name="doctitle" -->
         <title>PRODOWN</title>
-        <!-- InstanceEndEditable -->
-        <!-- InstanceBeginEditable name="head" -->
-        <!-- InstanceEndEditable -->
-        <link href="<?php echo base_url(); ?>application/views/css/style.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>application/views/css/style.css" />
     </head>
     <body>
         <div id="main">
@@ -48,14 +46,69 @@
                     </form>
                 </div>
               </div>
-              <div class="content"><!-- InstanceBeginEditable name="Content" -->
-              	<h1>Sua escola ainda não está cadastrada no PRODOWN?</h1>
-                <br>
-                <texto>Acesse a pagina de <a href="cadastro_escola.php">cadastramento de escola</a> e preencha o formulário.</texto>
-                <h1>O professor ainda não está cadastrado no PRODOWN?</h1>
-                <br>
-                <texto>Acesse a pagina de <a href="cadastro_professor.php">cadastramento de professor</a> e preencha o formulário.</texto>
-			  <!-- InstanceEndEditable --></div>
+
+                <div class="content">
+                    <center>
+                        <h1>Solicitação de Cadastro Escola</h1>
+                        <?php
+                        echo form_open('escola/solicita');
+                        if(isset($validation)){
+                            echo $validation;
+                        }
+                        echo form_label('Nome da Escola');
+                        //$temp = ;
+                        echo form_input(array('name' => 'nome'), set_value('nome'), 'autofocus');
+                        echo form_label('CNPJ');
+                        echo form_input(array('name' => 'cnpj'), '', '');
+                        echo form_label('Telefone');
+                        echo form_input(array('name' => 'telefone'), '', '');
+                        echo form_label('Email');
+                        echo form_input(array('name' => 'email'), '', '');
+
+                        echo form_dropdown('estados', $estados, 'RS', 'id="estados" width = "200" style="width: 200px"');
+                        echo '<br><br>';
+                        echo form_dropdown('cidades', array('1' => ''), 'RS', 'id="cidades" width = "200" style="width: 200px"');
+                        echo '<br><br>';
+                        echo form_submit('cadastrar','Enviar Solicitação');
+                        echo form_close();
+                        ?>
+                        <script>
+                            jQuery(function($) {
+                                $("#estados").click(function() {
+                                    var e = document.getElementById("estados");
+                                    var idEstado = e.selectedIndex +1;
+                                    var select = $("select[name=cidades]")[0];
+                                    if (idEstado !== 0) {
+                                        var base_url = <?php echo '"' . base_url() . '"'; ?>;
+
+                                        $.ajax({
+                                            //data: {estado: NormalizeString(encode_utf8(strUser))},
+                                            data: {estado: idEstado},
+                                            url: base_url + 'estado/getCidades',
+                                            method: 'GET',
+                                            type: 'GET',
+                                            dataType: 'json',
+                                            success: function(data) {
+                                                for (var i = 0; i < select.options.length; i++) {
+                                                    select.options[i] = null;
+                                                }
+                                                var i = 0;
+                                                for(var item in data){
+                                                    select.options[i] = new Option(data[item], item);
+                                                    i++;
+                                                }
+                                            },
+                                            error: function(error) {
+                                                alert("error");
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        </script>
+                    </center>
+                </div>
+            
             </div>
             <div id="scroll">
               <a title="Scroll to the top" class="top" href="#"><img src="<?php echo base_url(); ?>application/views/images/top.png" alt="top" /></a>

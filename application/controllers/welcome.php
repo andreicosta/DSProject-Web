@@ -11,6 +11,7 @@ class Welcome extends CI_Controller {
         parent::__construct();
         require_once 'application/controllers/login.php';
         require_once 'application/controllers/menu.php';
+        require_once 'application/controllers/estado.php';
         $this->login = new Login();
     }
 
@@ -47,7 +48,9 @@ class Welcome extends CI_Controller {
     }
 
     public function cadastro() {
-        $this->load->view('cadastro');
+        $estado = new Estado();
+        $data = array('estados' => $estado->getEstados());
+        $this->load->view('cadastro',$data);
     }
 
 }
