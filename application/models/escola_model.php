@@ -28,6 +28,44 @@ class Escola_model extends CI_Model {
         $result = array('success' => 'Escola inserida com sucesso');
         return $result;
     }
+    
+    public function doRemoveEscola($dados) {
+        $nome = $dados['nome'];
+        $idEscola = $dados['idEscola'];
+        $idCidade = $dados['idCidade'];
+        
+        /*Excluir escola da tabela*/
+        $query = "DELETE FROM Escola WHERE 
+            Cidade_idCidade='$idCidade' AND nome='$nome' AND idEscola='$idEscola'";
+
+        $result = mysqli_query($this->dbc->getLink(), $query);
+
+        if (!$result) {
+            $error = array('error' => 'Não foi possivel realizar a exclusão no BD.');
+            return $error;
+        }
+        /*Termino excluir professor*/
+        
+        /*Excluir Escola na tabela Escola_Professor*/
+        $query = "DELETE FROM Escola_Professor WHERE
+            Escola_idEscola='$idEscola'";
+        
+        echo $query;
+        
+        $result = mysqli_query($this->dbc->getLink(), $query);
+
+        if (!$result) {
+            $error = array('error' => 'Não foi possivel Excluir a Escola
+                na tabela Escola_Professor.');
+            return $error;
+        }
+        /*Fim Exclusão*/
+
+
+        $result = array('success' => 'Escola removido com sucesso');
+        return $result;
+    }
+    
 
 }
 

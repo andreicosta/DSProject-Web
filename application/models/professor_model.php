@@ -47,6 +47,44 @@ class Professor_model extends CI_Model{
         return $result;
     }
     
+    public function doRemoveProfessor($dados){
+        $nome = $dados['nome'];
+        $cpf = $dados['cpf'];
+        $email = $dados['email'];
+
+        /*Excluir o professor do sistema*/
+        $query = "DELETE FROM Professor WHERE 
+            cpf='$cpf' AND nome='$nome' AND '$email'";
+
+        $result = mysqli_query($this->dbc->getLink(), $query);
+
+        if (!$result) {
+            $error = array('error' => 'Não foi possivel realizar a remoção do
+                Professor no BD.');
+            return $error;
+        }
+        /*Fim da exclusão*/
+        
+        /*Excluir Professor na tabela Escola_Professor*/
+        $query = "DELETE FROM Escola_Professor WHERE
+            cpf='$cpf'";
+        
+        echo $query;
+        
+        $result = mysqli_query($this->dbc->getLink(), $query);
+
+        if (!$result) {
+            $error = array('error' => 'Não foi possivel Excluir o Professor
+                na tabela Escola_Professor.');
+            return $error;
+        }
+        /*Fim Exclusão*/
+
+
+        $result = array('success' => 'Professor removido com sucesso');
+        return $result;
+    }
+    
     public function getAll($dados){
         $cpf = $dados['cpf'];
         $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.idAluno, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno
