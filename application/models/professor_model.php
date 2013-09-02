@@ -85,7 +85,43 @@ class Professor_model extends CI_Model{
         return $result;
     }
     
-    public function getAll($dados){
+      public function get($dados){
+        $cpf = $dados['cpf'];
+        $genero = $dados['genero'];
+        $faixa1 = $dados['faixa1'];
+        $faixa2 = $dados['faixa2'];
+        $classificacao = $dados['classificacao'];
+        $escola = $dados['escola'];
+        $aluno = $dados['aluno'];
+        
+        $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.nascimento, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno
+            INNER JOIN Escola_Professor AS EP ON EP.Professor_cpf = Aluno.Professor_cpf AND EP.Escola_idEscola = Aluno.Escola_idEscola
+            WHERE EP.Professor_cpf = '$cpf' AND Aluno.genero = '$genero' AND Aluno.classificacao = '$classificacao' AND Aluno.escola = '$escola'
+                AND Aluno.nome = '$aluno' AND Aluno.nascimento >= '$faixa1' AND Aluno.nascimento <= '$faixa2'");
+        if (!$result) {
+            $error = array('error' => 'Não foi possivel Buscar os dados.');
+            return $error;
+        }
+        
+        $array = array();
+        $array[] = array('Nome', 'Data de Nascimento', 'Endereço', 'Genero', 'Nome da Mae', 'Nome do Pai', 'Telefone','Celular', 'Email');
+        while ($row = mysqli_fetch_array($result)) {
+            unset($temp);
+            $temp[] = $row['nome'];
+            $temp[] = $row['nascimento'];
+            $temp[] = $row['endereco'];
+            $temp[] = $genero;
+            $temp[] = $row['nomeDaMae'];
+            $temp[] = $row['nomeDoPai'];
+            $temp[] = $row['telefone'];
+            $temp[] = $row['celular'];
+            $temp[] = $row['email'];
+            $array[] = $temp;
+        }
+        return $array;
+    }
+    
+    /*public function getAll($dados){
         $cpf = $dados['cpf'];
         $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.idAluno, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno
             INNER JOIN Escola_Professor AS EP ON EP.Professor_cpf = Aluno.Professor_cpf AND EP.Escola_idEscola = Aluno.Escola_idEscola
@@ -217,7 +253,7 @@ class Professor_model extends CI_Model{
             $array[] = $temp;
         }
         return $array;
-    }
+    }*/
     
 }
 
