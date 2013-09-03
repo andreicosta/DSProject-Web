@@ -48,13 +48,11 @@ class Professor_model extends CI_Model{
     }
     
     public function doRemoveProfessor($dados){
-        $nome = $dados['nome'];
         $cpf = $dados['cpf'];
-        $email = $dados['email'];
 
         /*Excluir o professor do sistema*/
         $query = "DELETE FROM Professor WHERE 
-            cpf='$cpf' AND nome='$nome' AND '$email'";
+            cpf='$cpf'";
 
         $result = mysqli_query($this->dbc->getLink(), $query);
 

@@ -54,6 +54,34 @@ class Professor extends CI_Controller {
         }
     }
     
+    public function remove() {
+        if (isset($_POST['cpf'])) {
+            $data = array();
+            $data['cpf'] = $_POST['cpf'];
+            
+            $this->load->model('Professor_model');
+            $result = $this->Professor_model->doRemoveProfessor($data);
+            
+            
+            
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user);
+
+            $data2 = array('nome' => $nome, 'menus' => $menus);
+
+            if (isset($result['error'])) {
+                $data2['result'] = $result['error'];
+            }else{
+                $data2['result'] = $result['success'];
+            }
+            
+            $this->load->view('result_cadastro_escola',$data2);
+        }
+    }
+    
     public function buscar() {
         $loggedUser = $this->session->userdata('loggedUser');
         $nome = $loggedUser['nome'];

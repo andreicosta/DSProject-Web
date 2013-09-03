@@ -30,13 +30,11 @@ class Escola_model extends CI_Model {
     }
     
     public function doRemoveEscola($dados) {
-        $nome = $dados['nome'];
         $idEscola = $dados['idEscola'];
-        $idCidade = $dados['idCidade'];
         
         /*Excluir escola da tabela*/
         $query = "DELETE FROM Escola WHERE 
-            Cidade_idCidade='$idCidade' AND nome='$nome' AND idEscola='$idEscola'";
+            idEscola='$idEscola'";
 
         $result = mysqli_query($this->dbc->getLink(), $query);
 

@@ -76,6 +76,32 @@ class Escola extends CI_Controller {
             $this->load->view('cadastro_escola', $data);
         }
     }
+    
+    public function remove() {
+        if (isset($_POST['idEscola'])) {
+            $data = array();
+            $data['idEscola'] = $_POST['idEscola'];
+
+            $this->load->model('Escola_model');
+            $result = $this->Escola_model->doRemoveEscola($data);
+
+            $loggedUser = $this->session->userdata('loggedUser');
+            $nome = $loggedUser['nome'];
+            $user = $loggedUser['user'];
+            $menu = new Menu();
+            $menus = $menu->getMenus($user);
+
+            $data1 = array('nome' => $nome, 'menus' => $menus);
+
+            if (isset($error['error'])) {
+                $data1['result'] = $result['error'];
+            } else {
+                $data1['result'] = $result['success'];
+            }
+
+            $this->load->view('result_cadastro_escola', $data1);
+        }
+    }
 
     public function solicita() {
         $estado = new Estado();
