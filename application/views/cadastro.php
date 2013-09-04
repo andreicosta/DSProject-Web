@@ -1,121 +1,125 @@
-<!doctype html>
-<html><!-- InstanceBegin template="/Templates/template.dwt" codeOutsideHTMLIsLocked="false" -->
+<!DOCTYPE HTML>
+<html lang="en-US">
     <head>
-        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script type='text/javascript' src="<?php echo base_url(); ?>latinise_min.js"></script>
-        <meta name="description" content="website description" />
-        <meta name="keywords" content="website keywords, website keywords" />
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title>PRODOWN</title>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>application/views/css/style.css" />
+        <meta charset="UTF-8">
+        <title>ProDown</title>
+ 
+        <!-- JQUERY -->
+         <script src="<?php echo base_url();?>application/views/js/jquery-1.9.1.min.js"></script>
+         
+         
+         
+        <!-- TWITTER BOOTSTRAP CSS -->
+        <link href="<?php echo base_url();?>application/views/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url();?>application/views/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url();?>application/views/css/bootstrapreescrito.css" rel="stylesheet" type="text/css" />
+ 
+        <!-- TWITTER BOOTSTRAP JS -->
+        <script src="<?php echo base_url();?>application/views/js/bootstrap.min.js"></script>
+        <!--<script src="js/script.js"></script>-->
+ 
     </head>
     <body>
-        <div id="main">
-            <header>
-              <div id="logo">
-                
-              </div>
-              <nav>
-                <div id="menu_container">
-                  <ul class="sf-menu" id="nav">
-                    <li><?php echo anchor('welcome','Pagina Inicial'); ?></li>
-                    <li><?php echo anchor('welcome/cadastro','Cadastro'); ?></li>
-                  </ul>
-                </div>
-              </nav>
-            </header>
-            <div id="site_content">
-              <div id="sidebar_container">
-                <div class="sidebar">
-                    <form>
-                      <h1>Login</h1>
-                      <div class="inset">
-                      <p>
-                        <label for="cpf">CPF</label>
-                        <input type="text" name="cpf" id="cpf">
-                      </p>
-                      <p>
-                        <label for="senha">SENHA</label>
-                        <input type="password" name="senha" id="senha">
-                      </p>
-                      </div>
-                      <p class="p-container">
-                        <span>Esqueceu sua senha?</span>
-                        <input type="submit" name="go" id="go" value="Entrar">
-                      </p>
-                    </form>
-                </div>
-              </div>
-
-                <div class="content">
-                    <center>
-                        <h1>Solicitação de Cadastro Escola</h1>
-                        <?php
-                        echo form_open('escola/solicita');
-                        if(isset($validation)){
-                            echo $validation;
-                        }
-                        echo form_label('Nome da Escola');
-                        //$temp = ;
-                        echo form_input(array('name' => 'nome'), set_value('nome'), 'autofocus');
-                        echo form_label('CNPJ');
-                        echo form_input(array('name' => 'cnpj'), '', '');
-                        echo form_label('Telefone');
-                        echo form_input(array('name' => 'telefone'), '', '');
-                        echo form_label('Email');
-                        echo form_input(array('name' => 'email'), '', '');
-
-                        echo form_dropdown('estados', $estados, 'RS', 'id="estados" width = "200" style="width: 200px"');
-                        echo '<br><br>';
-                        echo form_dropdown('cidades', array('1' => ''), 'RS', 'id="cidades" width = "200" style="width: 200px"');
-                        echo '<br><br>';
-                        echo form_submit('cadastrar','Enviar Solicitação');
-                        echo form_close();
-                        ?>
-                        <script>
-                            jQuery(function($) {
-                                $("#estados").click(function() {
-                                    var e = document.getElementById("estados");
-                                    var idEstado = e.selectedIndex +1;
-                                    var select = $("select[name=cidades]")[0];
-                                    if (idEstado !== 0) {
-                                        var base_url = <?php echo '"' . base_url() . '"'; ?>;
-
-                                        $.ajax({
-                                            //data: {estado: NormalizeString(encode_utf8(strUser))},
-                                            data: {estado: idEstado},
-                                            url: base_url + 'estado/getCidades',
-                                            method: 'GET',
-                                            type: 'GET',
-                                            dataType: 'json',
-                                            success: function(data) {
-                                                for (var i = 0; i < select.options.length; i++) {
-                                                    select.options[i] = null;
-                                                }
-                                                var i = 0;
-                                                for(var item in data){
-                                                    select.options[i] = new Option(data[item], item);
-                                                    i++;
-                                                }
-                                            },
-                                            error: function(error) {
-                                                alert("error");
-                                            }
-                                        });
-                                    }
-                                });
-                            });
-                        </script>
-                    </center>
-                </div>
-            
-            </div>
-            <div id="scroll">
-              <a title="Scroll to the top" class="top" href="#"><img src="<?php echo base_url(); ?>application/views/images/top.png" alt="top" /></a>
-            </div>
-            <footer>
-              <p>Copyright &copy; CSS3_grass | <a href="http://www.css3templates.co.uk">design from css3templates.co.uk</a></p>
-            </footer>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="brand">ProDown</div>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><?php echo anchor('welcome', 'Início');?></li>
+              <li><?php echo anchor('welcome/downloads', 'Downloads');?></li>
+              <li><?php echo anchor('welcome/contatos', 'Contatos');?></li>
+            </ul>
+            <li><?php echo anchor('welcome/login', 'Login');?></li>
+          </div><!--/.nav-collapse -->
         </div>
+      </div>
+    </div>
+
+   <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-tabs nav-stacked">
+              <li><?php echo anchor('welcome/cadastro', 'Cadastro de Escola');?></li>
+              <li><a href="#">Como Aplicar o ProDown</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+            <div class="container1">
+               <div class="row-fluid1">
+                   <form method="POST" action="<?php echo base_url();?>escola/solicita">
+                     <fieldset>
+                     
+                     <!-- Form Name -->
+                     <legend>Cadastro de Escola</legend>
+                     
+                     <!-- Text input-->
+                     <div class="control-group">
+                       <label class="control-label" for="nome">Nome</label>
+                       <div class="controls">
+                         <input id="nome" name="nome" type="text" placeholder="Nome da escola" class="input-xlarge">
+                         
+                       </div>
+                     </div>
+                     
+                     <!-- Select Basic -->
+                     <div class="control-group">
+                       <label class="control-label" for="estado">Estado</label>
+                       <div class="controls">
+                         <select id="estado" name="estado" class="input-xlarge">
+                           <option>Rio Grande do Sul</option>
+                           <option>Santa Catarina</option>
+                         </select>
+                       </div>
+                     </div>
+                     
+                     <!-- Select Basic -->
+                     <div class="control-group">
+                       <label class="control-label" for="cidade">Cidade</label>
+                       <div class="controls">
+                         <select id="cidade" name="cidade" class="input-xlarge">
+                           <option>Cidade 1</option>
+                           <option>Cidade 2</option>
+                         </select>
+                       </div>
+                     </div>
+                     
+                     <!-- Textarea -->
+                     <div class="control-group">
+                       <label class="control-label" for="cpf">CPF dos Professores</label>
+                       <div class="controls">                     
+                         <textarea id="cpf" name="cpf"></textarea>
+                       </div>
+                     </div>
+                     
+                     <!-- Button -->
+                     <div class="control-group">
+                       <label class="control-label" for="botaocadastrar"></label>
+                       <div class="controls">
+                         <button id="botaocadastrar" name="botaocadastrar" class="btn btn-default">Cadastrar</button>
+                       </div>
+                     </div>
+                     
+                     </fieldset>
+                  </form>
+               </div>
+            </div> <!-- /container1 -->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p align="center">&copy; ProDown 2013</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+    
+    
     </body>
-<!-- InstanceEnd --></html>
+</html>

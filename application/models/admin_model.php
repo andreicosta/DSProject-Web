@@ -92,7 +92,7 @@ class Admin_model extends CI_Model {
         
         $result = mysqli_query($this->dbc->getLink(), $query);
         $array = array();
-        $array[] = array('Nome', 'Avaliacao', 'Data', 'Hora', 'Temp', 'Massa', 'Estatura', 'IMC', 'Envergadura', 'Sentar e Alcancar', 'Com Banco', 'Abdominal', '9 min', '6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20m');
+        $array[] = array();
         while ($row = mysqli_fetch_array($result)) {
             unset($temp);
             $temp[] = $row['nome'];

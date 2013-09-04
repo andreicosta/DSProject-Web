@@ -1,0 +1,160 @@
+.navbar-inverse .brand
+{
+	background-image: url(/home/felipe/www/application/views/img/iconeProDown.png);
+	background-size: 50px;
+	background-repeat: no-repeat;
+	background-position: left;
+	padding-left: 50px;
+}
+
+.navbar-inverse .brand:hover
+{
+	color: #999999;
+}
+
+.navbar .nav
+{
+	margin-left: 115px;
+}
+
+.navbar .nav > li
+{
+	padding-right: 90px;
+}
+
+.btn
+{
+	margin-left: 335px;
+}
+
+.btn a
+{
+	color: #000000;
+	text-decoration: none;
+}
+
+.row-fluid .span3
+{
+	height: 400px;
+}
+
+.row-fluid .span4
+{
+	padding-top: -10px;
+}
+
+.container1
+{
+	padding-left: 335px;
+	/*width: 100%;*/
+	margin-top: -60px;
+	*zoom: 1;
+}
+
+.container1 a
+{
+	text-decoration: none;
+	color: #333333;
+}
+
+.row-fluid1 {
+	width: 100%;
+	padding-top: 60px;
+	*zoom: 1;
+}
+
+p
+{
+	text-indent: 30px;
+	margin: 0 0 15px;
+}
+
+.navbar .nav li a:active
+{
+	color: #FFFFFF;
+}
+
+textarea
+{
+	height: 70px;
+	width: 270px;
+}
+
+#nome
+{
+	width: 500px;
+}
+
+#estado
+{
+	width: 285px;
+}
+
+#cidade
+{
+	width: 285px;
+}
+
+#botaocadastrar
+{
+	margin-left: 425px;
+}
+
+#cpf
+{
+	resize: none;
+}
+
+#botaoentrar
+{
+	margin-left: 220px;
+}
+
+#botaocadastrar1
+{
+	margin-left: 195px;
+}
+
+#removerButton
+{
+	margin-left: 185px;
+}
+
+#deSelect
+{
+	width: 90px;
+}
+
+#ateSelect
+{
+	width: 90px;
+}
+
+#escola
+{
+	width: 500px;
+}
+
+#escolaSelect
+{
+	width: 500px;
+}
+
+#consultasButton
+{
+	margin-left: 580px;
+}
+
+#enviarButton
+{
+	margin-left: 435px;
+}
+
+.bemvindo
+{
+	margin-left: 26px;
+	margin-bottom: -20px;
+	margin-right: 25px;
+	alignment-baseline: central;
+	text-align: center;
+}

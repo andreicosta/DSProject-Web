@@ -50,6 +50,10 @@ class Admin extends CI_Controller {
             }
         }
     }
+    
+    public function consulta(){
+        $this->load->view('consultasAdmin');
+    }
 
     public function buscaProf() {
         echo 'controler buscaProf()';

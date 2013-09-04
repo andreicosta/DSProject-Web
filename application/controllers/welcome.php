@@ -29,22 +29,36 @@ class Welcome extends CI_Controller {
         }
     }
 
-    public function login() {
+    public function downloads() {
+        $this->load->view('downloads');
+    }
+   
+    public function contatos() {
+        $this->load->view('contato');
+    }
+    
+    public function fazer_login() {
         if ($this->login->login($_POST['username'], $_POST['password'])) {
             $logado = $this->login->getLoggedUser();
             $nome = $logado['nome'];
             $user = $logado['user'];
 
-            $menu = new Menu();
-            $menus = $menu->getMenus($user);
-
-            $data = array('nome' => $nome, 'menus' => $menus);
-            $this->load->view('logado', $data);
+            $data = array('nome' => $nome);
+            if($user == 'administrador'){
+                $this->load->view('adminLogado', $data);
+            }
+            else{
+                $this->load->view('logado', $data);
+            }
         } else {
             $this->session->set_flashdata('ConnectionError', 'Erro no Login');
-            $this->load->view('index');
+            $this->load->view('login');
             //redirect('welcome');
         }
+    }
+    
+    public function login() {
+        $this->load->view('login');
     }
 
     public function cadastro() {

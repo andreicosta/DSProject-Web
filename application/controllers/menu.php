@@ -26,7 +26,7 @@ class Menu extends CI_Controller {
             $buscaFaixaet = anchor('admin/buscafaixaet','Busca por faixa etaria' , '');
             $buscaEscola =  anchor('admin/buscaEscola', 'Buscar por Escola','');
             return array('menu1' => $cadastroProfessor, 'menu2' => $cadastroEscola,'menu3' => $buscaAvaliacao,
-                    'menu4'=>$logout,'menu5'=>$buscagenero, 'menu6'=>$buscaFaixaet,'menu7'=> $buscaEscola,'menu8'=>$buscaProf);
+                    'menu4'=>$buscaProf,'menu5'=>$buscagenero, 'menu6'=>$buscaFaixaet,'menu7'=> $buscaEscola,'menu8'=>$logout);
         }
     }
 
