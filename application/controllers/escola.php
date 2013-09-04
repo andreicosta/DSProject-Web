@@ -22,54 +22,35 @@ class Escola extends CI_Controller {
         $data = array('nome' => $nome, 'menus' => $menus, 'estados' => $estado->getEstados());
         $this->load->view('cadastro_escola', $data);
     }
-
+    
     public function add() {
-        $this->form_validation->set_rules('nome', 'NOME', 'required|min_length[6]');
-
-        //$this->form_validation->set_rules('cnpj', 'CNPJ', 'required|min_length[6]');
-        if ($this->form_validation->run() == true) {
-			if (isset($_POST['nome'])) {
-                $data = array();
-                $data['nome'] = $_POST['nome'];
-                $data['idEstado'] = $_POST['estado'];
-                $data['idCidade'] = $_POST['cidade'];
-
-                $this->load->model('Escola_model');
-                $result = $this->Escola_model->doAddEscola($data);
-
-                $loggedUser = $this->session->userdata('loggedUser');
-                $nome = $loggedUser['nome'];
-                $user = $loggedUser['user'];
-                $menu = new Menu();
-                $menus = $menu->getMenus($user);
-
-                $data1 = array('nome' => $nome, 'menus' => $menus);
-                $data1['result'] = $result['msg'];
-				
-				//echo '<script>alert("'.$result['msg'].'")</script>';
-				
-                $this->load->view('cadastro_escola', $data1);
-            }
-        } else {
-            $temp = validation_errors();
-//            echo $temp;
+        if (isset($_POST['nome'])) {
+            $data = array();
+            $data['nome'] = $_POST['nome'];
+            $data['idCidade'] = $_POST['cidade'];
+            
+            $this->load->model('Escola_model');
+            $result = $this->Escola_model->doAddEscola($data);
+            
             $loggedUser = $this->session->userdata('loggedUser');
             $nome = $loggedUser['nome'];
             $user = $loggedUser['user'];
 
+            if (isset($result['error'])) {
+                $t = "Não foi possível criar Escola";
+                echo "<script>alert('$t')</script>";
+            }else{
+                $t = "Escola ".$data['nome']." criada";
+                echo "<script>alert('$t')</script>";
+            }
+            
             $menu = new Menu();
-            $menus = $menu->getMenus($user);
-
-            //$CI = $this->get_instance();
-            $estado = new Estado();
-
-            $data = array('nome' => $nome, 'menus' => $menus, 'estados' => $estado->getEstados(),
-                'validation' => $temp);
-            $this->form_validation->run();
-            $this->load->view('cadastro_escola', $data);
+	    $menus = $menu->getMenus($user);
+	    $estado = new Estado();
+	    $data1 = array('nome' => $nome, 'menus' => $menus, 'estados' => $estado->getEstados());
+	    $this->load->view('cadastro_escola', $data1);
         }
     }
-    
     
     public function remover() {
         #$CI = $this->get_instance();
