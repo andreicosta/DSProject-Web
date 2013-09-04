@@ -53,36 +53,41 @@ class Professor extends CI_Controller {
     }
     
     
-    public function remover(){
-        $this->load->view('removerProfessorAdmin');
+    public function remover() {
+        $this->load->model('Escola_model');
+        $escolas = $this->Escola_model->getEscolas();
+        $data = array('escolas' => $escolas);
+        $this->load->view('removerProfessorAdmin', $data);
     }
 
-
     public function remove() {
-        if (isset($_POST['cpf'])) {
+        if (isset($_POST['cidades'])) {
             $data = array();
-            $data['cpf'] = $_POST['cpf'];
-            
+            $data['cpf'] = $_POST['cidades'];
+
             $this->load->model('Professor_model');
             $result = $this->Professor_model->doRemoveProfessor($data);
-            
-            
-            
+
             $loggedUser = $this->session->userdata('loggedUser');
             $nome = $loggedUser['nome'];
             $user = $loggedUser['user'];
             $menu = new Menu();
             $menus = $menu->getMenus($user);
 
-            $data2 = array('nome' => $nome, 'menus' => $menus);
+            $this->load->model('Escola_model');
+            $CI = $this->get_instance();
+            $CI->load->model('Escola_model');
+            $escolas = $CI->Escola_model->getEscolas();
+            
+            $data2 = array('nome' => $nome, 'menus' => $menus,'escolas'=>$escolas);
 
             if (isset($result['error'])) {
                 $data2['result'] = $result['error'];
-            }else{
+            } else {
                 $data2['result'] = $result['success'];
             }
-            
-            $this->load->view('removerProfessorAdmin',$data2);
+
+            $this->load->view('removerProfessorAdmin', $data2);
         }
     }
     

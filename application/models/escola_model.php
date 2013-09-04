@@ -8,31 +8,34 @@ class Escola_model extends CI_Model {
     }
     
     public function getEscolas() {
+        $this->load->model('DBConnection', 'dbc');
         $result = mysqli_query($this->dbc->getLink(), "SELECT * FROM Escola");
         $escolas = array();
         while ($row = mysqli_fetch_array($result)) {
-            $escolas[$row['nome']] = $row['nome'];
+            $escolas[$row['idEscola']] = $row['nome'];
         }
         return $escolas;
     }
 
-public function doAddEscola($dados) {
+    public function doAddEscola($dados) {
         $nome = $dados['nome'];
+        $cnpj = $dados['cnpj'];
+        $telefone = $dados['telefone'];
+        $email = $dados['email'];
         $idEstado = $dados['idEstado'];
-        //$idCidade = $dados['idCidade'];
-	$idCidade = rand(10, 100000);
-		
+        $idCidade = $dados['idCidade'];
+
         $query = "INSERT INTO Escola(idEscola,Cidade_idCidade,nome) VALUES 
-            (6,".$idCidade.',"'.$nome.'")';
+            ('NULL',$idCidade,'$nome')";
 
         $result = mysqli_query($this->dbc->getLink(), $query);
 
         if (!$result) {
-            $result = array('msg' => 'Não foi possivel realizar a inserção no BD.');
-            return $result;
+            $error = array('error' => 'Não foi possivel realizar a inserção no BD.');
+            return $error;
         }
 
-        $result = array('msg' => 'Escola inserida com sucesso');
+        $result = array('success' => 'Escola inserida com sucesso');
         return $result;
     }
     
@@ -41,8 +44,10 @@ public function doAddEscola($dados) {
         
         /*Excluir escola da tabela*/
         $query = "DELETE FROM Escola WHERE 
-            idEscola='$idEscola'";
-
+            idEscola = '$idEscola'";
+        
+        //echo $idEscola . '<br>';
+        
         $result = mysqli_query($this->dbc->getLink(), $query);
 
         if (!$result) {
