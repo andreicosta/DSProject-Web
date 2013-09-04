@@ -37,21 +37,22 @@ class Professor extends CI_Controller {
             $nome = $loggedUser['nome'];
             $user = $loggedUser['user'];
 
-            $data2 = array('nome' => $nome);
-
             if (isset($result['error'])) {
-                $data2['result'] = $result['error'];
+                $t = "Não foi possível criar o Professor";
+                echo "<script>alert('$t')</script>";
             }else{
-                $data2['result'] = $result['success'];
-                $t = "Sua senha é: ".$result['success'];
+                $t = "Professor ".$data['nome']." criado com senha: ".$result['success'];
                 echo "<script>alert('$t')</script>";
             }
             
-            
+            $CI = $this->get_instance();
+			$CI->load->model('admin_model');
+			$escolas = $CI->admin_model->getEscolas($user);
+			$estado = new Estado();
+			$data2 = array('nome' => $nome, 'estados' => $estado->getEstados(), 'escolas' => $escolas);
             $this->load->view('cadastro_professor',$data2);
         }
     }
-    
     
     public function remover() {
         $this->load->model('Escola_model');
