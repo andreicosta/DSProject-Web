@@ -53,9 +53,7 @@
         </div><!--/span-->
             <div class="container1">
                <div class="row-fluid1">
-                  <form class="form-horizontal">
-                     
-                      <form method="POST" action="<?php echo base_url();?>professor/mostrar">
+                  <form class="form-horizontal" method="POST" action="<?php echo base_url();?>professor/mostrar">
                         <fieldset>
                         
                         <!-- Form Name -->
@@ -63,16 +61,16 @@
                         
                         <!-- Multiple Checkboxes -->
                         <div class="control-group">
-                          <label class="control-label" for="generocheck"></label>
+                          <label class="control-label" for="checkGenero"></label>
                           <div class="controls" style="float:left; margin-left:20px;">
-                           <label class="checkbox" for="generocheck-0">
-                              <input type="checkbox" name="checkGenero" id="generocheck-0" value="Gênero">
+                           <label class="checkbox" for="checkGenero">
+                              <input type="checkbox" name="checkGenero" id="checkGenero" value="Gênero">
                               Gênero
                            </label>
                           </div>
                           <div class="controls" style="float:left; margin:0 0 0 100px;">
                             <label class="radio inline" for="mascFemRadios-0" style="margin-right: 50px;">
-                              <input type="radio" name="Masculino" id="mascFemRadios-0" value="Masculino" checked="checked">
+                              <input type="radio" name="Masculino" id="mascFemRadios-0" value="Masculino">
                               Masculino
                             </label>
                             <label class="radio inline" for="mascFemRadios-1">
@@ -163,7 +161,7 @@
                         <div class="control-group">
                           <label class="control-label" for="consultasButton"></label>
                           <div class="controls">
-                            <input type="submit" value="Consultar" />
+                            <input type="submit" id="consultasButton" name="consultasButton" class="btn" value="Consultar" />
                           </div>
                         </div>
                         

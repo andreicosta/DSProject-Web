@@ -100,20 +100,11 @@ class Professor extends CI_Controller {
         $this->load->view('consultasProfessor', $data);
     }
     
-    public function mostrar() {
-
+    public function mostrar(){
         $loggedUser = $this->session->userdata('loggedUser');
         $nome = $loggedUser['nome'];
-        $user = $loggedUser['user'];
         $cpf = $loggedUser['username'];
-        $menu = new Menu();
-        $menus = $menu->getMenus($user);
         
-        $checkGenero = $_POST['checkGenero'];
-        $checkFaixa = $_POST['checkFaixa'];
-        $checkClassificacao = $_POST['checkClassificacao'];
-        $checkEscola = $_POST['checkEscola'];
-        $checkAluno = $_POST['checkAluno'];
         
         $genero = '*';
         $faixa1 = '*';
@@ -122,7 +113,7 @@ class Professor extends CI_Controller {
         $escola = '*';
         $aluno = '*';
         
-        if($checkGenero){
+        if(isset($_POST['checkGenero'])){
             if(isset($_POST['Masculino'])){
                 $genero = 'Masculino';
             }
@@ -131,24 +122,24 @@ class Professor extends CI_Controller {
             }
         }
         
-        if($checkFaixa){
+        if(isset($_POST['checkFaixa'])){
             $faixa1 = $_POST['faixa1'];
             $faixa2 = $_POST['faixa2'];
         }
         
-        if($checkClassificacao){
+        if(isset($_POST['checkClassificacao'])){
             $classificacao = $_POST['classificacao'];
         }
         
-        if($checkEscola){
+        if(isset($_POST['checkEscola'])){
             $escola = $_POST['escola'];
         }
         
-        if($checkAluno){
+        if(isset($_POST['checkAluno'])){
             $aluno = $_POST['aluno'];
         }
         
-        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'genero' => $genero,
+        $data = array('nome' => $nome, 'cpf' => $cpf, 'genero' => $genero,
             'faixa1' => $faixa1, 'faixa2' => $faixa2, 'classificacao' => $classificacao,
             'escola' => $escola, 'aluno' => $aluno);
 
@@ -156,7 +147,7 @@ class Professor extends CI_Controller {
         $CI->load->model('professor_model');
         $result = $CI->professor_model->get($data);
         $data['aval'] = $result;
-        $this->load->view('mostra_professor', $data);
+        $this->load->view('mostraTudo_professor', $data);
     }
     
     /*public function buscarGenero() {
