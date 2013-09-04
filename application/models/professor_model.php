@@ -16,45 +16,34 @@ class Professor_model extends CI_Model{
         return $profes;
     }
     
-
-    
     public function doAddProfessor($dados) {
         $nome = $dados['nome'];
         $cpf = $dados['cpf'];
-        $senha = md5($dados['senha']);
         $email = $dados['email'];
-        $idEscola = $dados['idEscola'];
-
-        /*Inserir professor antes de inserir ele na tabela Escola_Professor*/
-        $query = "INSERT INTO Professor(cpf,nome,senha,email) VALUES 
-            ('$cpf','$nome','$senha','$email')";
+        $caracteres = "0123456789abcdefghijklmnopqrstuvwxyz";
+	$senha = substr(str_shuffle($caracteres),0,6);
+        $md5senha = md5($senha);
+        $idEscola = $dados['escola'];
+        
+        $query = "INSERT INTO Professor(cpf,nome,senha,email) VALUES ('$cpf','$nome','$md5senha','$email')";
 
         $result = mysqli_query($this->dbc->getLink(), $query);
 
         if (!$result) {
-            $error = array('error' => 'Não foi possivel realizar a inserção do
-                Professor no BD.');
+            $error = array('error' => 'Não foi possivel realizar a inserção do Professor no BD.');
             return $error;
         }
-        /*Fim da insersão*/
         
-        /*Inserir Professor na tabela Escola_Professor*/
-        $query = "INSERT INTO Escola_Professor(Escola_idEscola,Professor_cpf)
-            VALUES ($idEscola,'$cpf')";
-        
-        echo $query;
+        $query = "INSERT INTO Escola_Professor(Escola_idEscola,Professor_cpf) VALUES ($idEscola,'$cpf')";
         
         $result = mysqli_query($this->dbc->getLink(), $query);
 
         if (!$result) {
-            $error = array('error' => 'Não foi possivel Inserir o Professor
-                na tabela Escola_Professor.');
+            $error = array('error' => 'Não foi possivel Inserir o Professor na tabela Escola_Professor.');
             return $error;
         }
-        /*Fim Insersão*/
 
-
-        $result = array('success' => 'Professor inserido com sucesso');
+        $result = array('success' => $senha);
         return $result;
     }
     
