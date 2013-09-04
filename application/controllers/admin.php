@@ -8,6 +8,68 @@ class Admin extends CI_Controller {
         require_once 'application/controllers/estado.php';
     }
 
+     public function buscaM() {
+
+        $loggedUser = $this->session->userdata('loggedUser');
+        $nome = $loggedUser['nome'];
+        $user = $loggedUser['user'];
+        $cpf = $loggedUser['username'];
+        $menu = new Menu();
+        $menus = $menu->getMenus($user);
+        
+        $checkGenero = $_POST['generocheck'];
+        $checkFaixa = $_POST['faixaEtariaCheck'];
+        $checkClassificacao = $_POST['classificacaoCheck'];
+        $checkEscola = $_POST['escolaCheck'];
+        $checkAluno = $_POST['alunoCheck'];
+        
+        $genero = '*';
+        $faixa1 = '*';
+        $faixa2 = '*';
+        $classificacao = '*';
+        $escola = '*';
+        $aluno = '*';
+        
+        if($checkGenero){
+            if(isset($_POST['Masculino'])){
+                $genero = 'Masculino';
+            }
+            else{
+                $genero = 'Feminino';
+            }
+        }
+        
+        if($checkFaixa){
+            $faixa1 = $_POST['faixa1'];
+            $faixa2 = $_POST['faixa2'];
+        }
+        
+        if($checkClassificacao){
+            $classificacao = $_POST['classificacao'];
+        }
+        
+        if($checkEscola){
+            $escola = $_POST['escola'];
+        }
+        
+        if($checkAluno){
+            $aluno = $_POST['aluno'];
+        }
+        
+        $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'genero' => $genero,
+            'faixa1' => $faixa1, 'faixa2' => $faixa2, 'classificacao' => $classificacao,
+            'escola' => $escola, 'aluno' => $aluno);
+
+        $CI = $this->get_instance();
+        $CI->load->model('admin_model');
+        $result = $CI->admin_model->get($data);
+        $data['aval'] = $result;
+        $this->load->view('mostra_professor', $data);
+    }
+    
+    
+    
+    
     public function buscarAvaliacao() {
         $loggedUser = $this->session->userdata('loggedUser');
         $nome = $loggedUser['nome'];

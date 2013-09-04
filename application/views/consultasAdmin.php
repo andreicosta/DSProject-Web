@@ -58,7 +58,7 @@
                <div class="row-fluid1">
                   <form class="form-horizontal">
                      
-                     <form class="form-horizontal">
+                     <form method="POST" action="<?php echo base_url();?>admin/buscaM">
                         <fieldset>
                         
                         <!-- Form Name -->
@@ -127,23 +127,7 @@
                           </div>
                         </div>
                         
-                        <div class="control-group">
-                          <label class="control-label" for="classificacaoCheck"></label>
-                          <div class="controls" style="float:left; margin-left:20px;">
-                            <label class="checkbox" for="classificacaoCheck-0">
-                              <input type="checkbox" name="classificacaoCheck" id="classificacaoCheck-0" value="Classificação">
-                              Estado
-                            </label>
-                          </div>
-                          <div class="controls" style="float:left; margin:0 0 0 103px;">
-                            <select id="classificacaoSelect" name="classificacaoSelect" class="input-xlarge">
-                              <option>Rio Grande do Sul</option>
-                              <option>Santa catarina</option>
-                            </select>
-                          </div>
-                        </div>
-                        
-                        
+                    
                         
                         <!-- Multiple Checkboxes -->
                         <div class="control-group">
@@ -178,11 +162,11 @@
                           </div>
                         </div>
                         
-                        <!-- Button -->
+                       <!-- Button -->
                         <div class="control-group">
                           <label class="control-label" for="consultasButton"></label>
                           <div class="controls">
-                            <button id="consultasButton" name="consultasButton" class="btn btn-default">Consultar</button>
+                            <input type="submit" value="Consultar" />
                           </div>
                         </div>
                         
