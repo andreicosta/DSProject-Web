@@ -77,6 +77,10 @@ class Escola extends CI_Controller {
         }
     }
     
+    public function remover(){
+        $this->load->view('removerEscolaAdmin');
+    }
+    
     public function remove() {
         if (isset($_POST['idEscola'])) {
             $data = array();
@@ -99,7 +103,7 @@ class Escola extends CI_Controller {
                 $data1['result'] = $result['success'];
             }
 
-            $this->load->view('result_cadastro_escola', $data1);
+            $this->load->view('removerEscolaAdmin', $data1);
         }
     }
 

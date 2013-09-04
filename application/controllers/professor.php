@@ -54,6 +54,11 @@ class Professor extends CI_Controller {
         }
     }
     
+    public function remover(){
+        $this->load->view('removerProfessorAdmin');
+    }
+
+
     public function remove() {
         if (isset($_POST['cpf'])) {
             $data = array();
@@ -78,7 +83,7 @@ class Professor extends CI_Controller {
                 $data2['result'] = $result['success'];
             }
             
-            $this->load->view('result_cadastro_escola',$data2);
+            $this->load->view('removerProfessorAdmin',$data2);
         }
     }
     
@@ -92,7 +97,7 @@ class Professor extends CI_Controller {
         $data = array('nome' => $nome, 'menus' => $menus, 'genero' => 0);
 
 
-        $this->load->view('buscaGenero_professor', $data);
+        $this->load->view('consultasProfessor', $data);
     }
     
     public function mostrar() {
@@ -151,7 +156,7 @@ class Professor extends CI_Controller {
         $CI->load->model('professor_model');
         $result = $CI->professor_model->get($data);
         $data['aval'] = $result;
-        $this->load->view('mostraGenero_professor', $data);
+        $this->load->view('mostra_professor', $data);
     }
     
     /*public function buscarGenero() {
