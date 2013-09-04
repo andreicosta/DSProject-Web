@@ -147,6 +147,30 @@ class Professor_model extends CI_Model{
         return $array;
     }
     
+    public function getEscolas($cpf){
+        $query = "SELECT Escola_Professor.Escola_idEscola FROM Escola_Professor 
+        Where Escola_Professor.Professor_cpf = '$cpf'"; 
+        $result = mysqli_query($this->dbc->getLink(), $query);
+        
+        $array = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $array = $row;
+        }
+        return $array;
+    }
+    
+    public function getAlunos($cpf){
+        
+        $query = "SELECT Aluno.nome FROM Aluno 
+        Where Aluno.Professor_cpf = '$cpf'"; 
+        $result = mysqli_query($this->dbc->getLink(), $query);
+        
+        $array = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $array[] = $row['nome'];
+        }
+        return $array;
+    }
     /*public function getAll($dados){
         $cpf = $dados['cpf'];
         $result = mysqli_query($this->dbc->getLink(), "SELECT Aluno.nome, Aluno.idAluno, Aluno.nascimento, Aluno.genero, Aluno.endereco, Aluno.nomeDaMae, Aluno.nomeDoPai, Aluno.telefone, Aluno.celular, Aluno.email FROM Aluno

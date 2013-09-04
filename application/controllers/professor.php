@@ -90,13 +90,14 @@ class Professor extends CI_Controller {
     public function buscar() {
         $loggedUser = $this->session->userdata('loggedUser');
         $nome = $loggedUser['nome'];
-        $user = $loggedUser['user'];
-        $menu = new Menu();
-        $menus = $menu->getMenus($user);
+        $user = $loggedUser['username'];
         
-        $data = array('nome' => $nome, 'menus' => $menus, 'genero' => 0);
-
-
+        $CI = $this->get_instance();
+        $CI->load->model('professor_model');
+        $escolas = $CI->professor_model->getEscolas($user);
+        $alunos = $CI->professor_model->getAlunos($user);
+        
+        $data = array('nome' => $nome, 'alunos' => $alunos, 'escolas' => $escolas);
         $this->load->view('consultasProfessor', $data);
     }
     
