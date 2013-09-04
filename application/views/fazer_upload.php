@@ -53,8 +53,6 @@
         </div><!--/span-->
             <div class="container1">
                <div class="row-fluid1">
-                  <form class="form-horizontal">
-                     <fieldset>
                      
                         <!-- Form Name -->
                         <legend>Enviar Arquivo</legend>
@@ -73,8 +71,6 @@
                         }
 
                         ?>
-                     </fieldset>
-                  </form>
                </div>
             </div> <!-- /container1 -->
       </div><!--/row-->

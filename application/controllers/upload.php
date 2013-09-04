@@ -36,11 +36,10 @@ class Upload extends CI_Controller {
         $menu = new Menu();
         $menus = $menu->getMenus($user);
         
+        
             $data = array('nome' => $nome, 'error' => $this->upload->display_errors(),'menus'=>$menus);
             $this->load->view('logado', $data);
         } else {
-            //$temp = $this->session->all_userdata();
-            //$data = array('nome'=>$temp['nome'],'upload_data' => $this->upload->data());
             $fileName = $this->upload->data();
             $fileName = $fileName['file_name'];
 
@@ -49,7 +48,7 @@ class Upload extends CI_Controller {
 
             $nome = $this->session->userdata('loggedUser');
             $data = array('nome' => $nome['nome'],'upload_data' => $this->upload->data());
-            $this->load->view('upload_success', $data);
+            $this->load->view('upload_success');
         }
     }
 
