@@ -67,8 +67,9 @@
                        <label class="control-label" for="selecionaEscola">Escola</label>
                        <div class="controls">
                          <select id="selecionaEscola" name="selecionaEscola" class="input-xlarge">
-                           <option>Escola 1</option>
-                           <option>Escola 2</option>
+                                <?php foreach ($escolas as $escola): ?>
+                                    <option><?php echo $escola; ?></option>
+                                <?php endforeach; ?>
                          </select>
                        </div>
                      </div>
@@ -78,8 +79,9 @@
                        <label class="control-label" for="selecionaProfessor">Professor</label>
                        <div class="controls">
                          <select id="selecionaProfessor" name="selecionaProfessor" class="input-xlarge">
-                           <option>Professor 1</option>
-                           <option>Professor 2</option>
+                           <?php foreach ($professor as $prof): ?>
+                                    <option><?php echo $prof; ?></option>
+                           <?php endforeach; ?>
                          </select>
                        </div>
                      </div>
@@ -88,7 +90,7 @@
                      <div class="control-group">
                        <label class="control-label" for="removerButton"></label>
                        <div class="controls">
-                         <button id="removerButton" name="removerButton" class="btn btn-default">Remover</button>
+                         <button type="Submit" id="removerButton" name="removerButton" class="btn btn-default" value="RemoverProfessor">Remover</button>
                        </div>
                      </div>
                      
