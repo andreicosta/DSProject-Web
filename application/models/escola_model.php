@@ -6,6 +6,15 @@ class Escola_model extends CI_Model {
         parent::__construct();
         $this->load->model('DBConnection', 'dbc');
     }
+    
+    public function getEscolas() {
+        $result = mysqli_query($this->dbc->getLink(), "SELECT * FROM Escola");
+        $escolas = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $escolas[$row['nome']] = $row['nome'];
+        }
+        return $escolas;
+    }
 
 public function doAddEscola($dados) {
         $nome = $dados['nome'];

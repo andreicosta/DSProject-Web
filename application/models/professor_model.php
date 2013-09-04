@@ -7,6 +7,15 @@ class Professor_model extends CI_Model{
         $this->load->model('DBConnection','dbc');
     }
     
+    public function getProfessores() {
+        $result = mysqli_query($this->dbc->getLink(), "SELECT * FROM Professor");
+        $profes = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $profes[$row['nome']] = $row['nome'];
+        }
+        return $profes;
+    }
+    
     public function doAddProfessor($dados) {
         $nome = $dados['nome'];
         $cpf = $dados['cpf'];
