@@ -10,10 +10,14 @@ class Professor_model extends CI_Model{
     public function doAddProfessor($dados) {
         $nome = $dados['nome'];
         $cpf = $dados['cpf'];
-        $senha = md5($dados['senha']);
         $email = $dados['email'];
-        $idEscola = $dados['idEscola'];
-
+        $a = rand(0, 9);
+        $b = rand(0, 9);
+        $c = rand(0, 9);
+        $d = rand(0, 9);
+        $senha = $a.$b.$c.$d;
+        $idEscola = $dados['escola'];
+        
         /*Inserir professor antes de inserir ele na tabela Escola_Professor*/
         $query = "INSERT INTO Professor(cpf,nome,senha,email) VALUES 
             ('$cpf','$nome','$senha','$email')";
@@ -31,8 +35,6 @@ class Professor_model extends CI_Model{
         $query = "INSERT INTO Escola_Professor(Escola_idEscola,Professor_cpf)
             VALUES ($idEscola,'$cpf')";
         
-        echo $query;
-        
         $result = mysqli_query($this->dbc->getLink(), $query);
 
         if (!$result) {
@@ -42,8 +44,7 @@ class Professor_model extends CI_Model{
         }
         /*Fim Insersão*/
 
-
-        $result = array('success' => 'Professor inserido com sucesso');
+        $result = array('success' => $senha);
         return $result;
     }
     
@@ -92,7 +93,7 @@ class Professor_model extends CI_Model{
         $escola = $dados['escola'];
         $aluno = $dados['aluno'];
         
-        $query = "SELECT data, horario, temperatura, massaCorporal, nome FROM `Avaliacao` AS AV
+        $query = "SELECT * FROM `Avaliacao` AS AV
 	INNER JOIN `Aluno` AS A ON `AV`.`Aluno_idAluno` = `A`.`idAluno`
 	INNER JOIN `Escola_Professor` AS EP ON `EP`.`Escola_idEscola` = `A`.`Escola_idEscola` AND `EP`.`Professor_cpf` = `A`.`Professor_cpf`
 	WHERE `EP`.`Professor_cpf` = '$cpf'";
@@ -133,18 +134,7 @@ class Professor_model extends CI_Model{
             return $error;
         }
         
-        $array = array();
-        $array[] = array('data', 'horario', 'temperatura', 'massaCorporal', 'nome');
-        while ($row = mysqli_fetch_array($result)) {
-            unset($temp);
-            $temp[] = $row['data'];
-            $temp[] = $row['horario'];
-            $temp[] = $row['temperatura'];
-            $temp[] = $row['massaCorporal'];
-            $temp[] = $row['nome'];
-            $array[] = $temp;
-        }
-        return $array;
+        return $result;
     }
     
     public function getEscolas($cpf){

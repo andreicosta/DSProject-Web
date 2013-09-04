@@ -34,7 +34,7 @@
               <li><?php echo anchor('welcome/downloads', 'Downloads');?></li>
               <li><?php echo anchor('welcome/contatos', 'Contatos');?></li>
             </ul>
-            <li><?php echo anchor('login/logout', 'Logout');?></li>
+            <li><?php echo anchor('login/logout', '<div class="btn">Logout</div>');?></li>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -123,27 +123,7 @@
                             </label>
                           </div>
                         </div>
-                        
-                        <!-- Multiple Checkboxes -->
-                        <div class="control-group">
-                          <label class="control-label" for="classificacaoCheck"></label>
-                          <div class="controls" style="float:left; margin-left:20px;">
-                            <label class="checkbox" for="classificacaoCheck-0">
-                              <input type="checkbox" name="checkClassificacao" id="classificacaoCheck-0" value="Classificação">
-                              Classificação
-                            </label>
-                          </div>
-                          <div class="controls" style="float:left; margin:0 0 0 65px;">
-                            <select id="classificacaoSelect" name="classificacao" class="input-xlarge">
-                              <option>Fraco</option>
-                              <option>Razoável</option>
-                              <option>Bom</option>
-                              <option>Muito Bom</option>
-                              <option>Ótimo</option>                              
-                            </select>
-                          </div>
-                        </div>
-                                
+                         
                         <!-- Multiple Checkboxes -->
                         <div class="control-group">
                           <label class="control-label" for="escolaCheck"></label>

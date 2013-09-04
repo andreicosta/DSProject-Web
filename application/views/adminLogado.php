@@ -46,7 +46,7 @@
           <div class="bemvindo"><h4>Bem vindo, Admin</h4></div>
           <div class="well sidebar-nav">
             <ul class="nav nav-tabs nav-stacked">
-              <li><?php echo anchor('admin/consulta', 'Consultas');?></li>
+              <li><?php echo anchor('admin/buscar', 'Consultas');?></li>
               <li><?php echo anchor('professor/cadastro', 'Cadastro de Professor');?></li>
               <li><?php echo anchor('escola/cadastro', 'Cadastro de Escola');?></li>
               <li><?php echo anchor('professor/remover', 'Remover Professor');?></li>

@@ -1,0 +1,93 @@
+<prodown_envio>
+<alunos><aluno>
+<nome>Ticomegranha Ticomegranha </nome>
+<nascimento>1997-08-15 </nascimento>
+<genero>Feminino </genero>
+<endereco>Rua do pirulito </endereco>
+<cidade>Cidade chiclete/Alegrolandia </cidade>
+<nome_mae>Ticomegranhona Ticomerganha </nome_mae>
+<nome_pai>Pai genérico n vinte e cinco </nome_pai>
+<telefone>1111-1203 </telefone>
+<celular>1241-4214 </celular>
+<email>ttttpg@email.com </email>
+<avaliacao>
+<data>2010-08-01 </data>
+<horario>11:11:00 </horario
+><temperatura>11 </temperatura>
+<massa_corporal>11.0 </massa_corporal>
+<estatura>11.0 </estatura>
+<imc>909.09 </imc>
+<envergadura>11.0 </envergadura>
+<abdominal>11 </abdominal>
+<sentar_e_alcancar>11.0 </sentar_e_alcancar>
+<banco>true </banco>
+<seis_minutos>11.0 </seis_minutos>
+<nove_minutos>-1.0 </nove_minutos>
+<salto_horizontal>11.0 </salto_horizontal>
+<arremesso_medicineball>11.0 </arremesso_medicineball>
+<quadrado>11.0 </quadrado>
+<corrida>11.0 </corrida>
+</avaliacao>
+</aluno>
+<aluno>
+<nome>HOMEM TORRADAAAAAA </nome>
+<nascimento>2001-08-17 </nascimento>
+<genero>Masculino </genero>
+<endereco>Rua dos pãezinhos </endereco>
+<cidade>Brokeport/Califórnia </cidade>
+<nome_mae>MULHER SANDWICHE </nome_mae>
+<nome_pai>HOMEM CHOCOLATE </nome_pai>
+<telefone>8888-8888 </telefone>
+<celular>9999-9999 </celular>
+<email>pao.migalha@condimentos.com </email>
+<avaliacao>
+<data>2013-08-18 </data>
+<horario>23:23:00 </horario
+><temperatura>23 </temperatura>
+<massa_corporal>23.0 </massa_corporal>
+<estatura>23.0 </estatura>
+<imc>434.78 </imc>
+<envergadura>23.0 </envergadura>
+<abdominal>23 </abdominal>
+<sentar_e_alcancar>23.0 </sentar_e_alcancar>
+<banco>false </banco>
+<seis_minutos>-1.0 </seis_minutos>
+<nove_minutos>23.0 </nove_minutos>
+<salto_horizontal>23.0 </salto_horizontal>
+<arremesso_medicineball>23.0 </arremesso_medicineball>
+<quadrado>23.0 </quadrado>
+<corrida>23.0 </corrida>
+</avaliacao>
+</aluno>
+<aluno>
+<nome>Zé da galinha preta </nome>
+<nascimento>2004-08-02 </nascimento>
+<genero>Masculino </genero>
+<endereco>Rua calças borradas 127 </endereco>
+<cidade>Spriengfield/UKNOW </cidade>
+<nome_mae>Bruxa malvada </nome_mae>
+<nome_pai>Boi da cara preta </nome_pai>
+<telefone>2931-4782 </telefone>
+<celular>1329-4709 </celular>
+<email>impossivel@surreal.real </email>
+<avaliacao>
+<data>2010-08-14 </data>
+<horario>12:12:00 </horario
+><temperatura>12 </temperatura>
+<massa_corporal>12.0 </massa_corporal>
+<estatura>12.0 </estatura>
+<imc>833.33 </imc>
+<envergadura>12.0 </envergadura>
+<abdominal>12 </abdominal>
+<sentar_e_alcancar>12.0 </sentar_e_alcancar>
+<banco>true </banco>
+<seis_minutos>-1.0 </seis_minutos>
+<nove_minutos>12.0 </nove_minutos>
+<salto_horizontal>12.0 </salto_horizontal>
+<arremesso_medicineball>12.0 </arremesso_medicineball>
+<quadrado>12.0 </quadrado>
+<corrida>12.0 </corrida>
+</avaliacao>
+</aluno>
+</alunos>
+</prodown_envio>

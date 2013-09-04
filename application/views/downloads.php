@@ -35,7 +35,7 @@
               <li><?php echo anchor('welcome/downloads', 'Downloads');?></li>
               <li><?php echo anchor('welcome/contatos', 'Contatos');?></li>
             </ul>
-            <li><?php echo anchor('welcome/login', 'Login');?></li>
+            <li><?php echo anchor('welcome/login', '<div class="btn">Login</div>');?></li>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -54,15 +54,15 @@
             <div class="container1" align="center">
                <div class="row-fluid">
                   <div class="span4" >
-                     <a href="#"><img src="img/linux-logo1.png" alt="linux" width="200" height="600" align="middle"/>
+                      <a href="#"><img src="<?php echo base_url("application/views/img/linux-logo1.png");?>" alt="linux" width="200" height="600" align="middle"/>
                      <p><h2>Linux</h2></p></a>
                   </div>
                   <div class="span4">
-                     <a href="#"><img src="img/apple_ipad_logo1.png" alt="apple" width="200" height="600" align="middle"/>
+                     <a href="#"><img src="<?php echo base_url("application/views/img/apple_ipad_logo1.png");?>" alt="apple" width="200" height="600" align="middle"/>
                      <p><h2>Mac OS</h2></p></a>
                   </div>
                   <div class="span4">
-                     <a href="#"><img src="img/Windows-logo11.png" alt="windows" width="200" height="600" align="middle" />
+                     <a href="#"><img src="<?php echo base_url("application/views/img/Windows-logo11.png");?>" alt="windows" width="200" height="600" align="middle" />
                      <p align="center"><h2>Windows</h2></p></a>
                   </div>
          </div> <!-- /container1 -->

@@ -7,6 +7,19 @@ class Admin extends CI_Controller {
         require_once 'application/controllers/menu.php';
         require_once 'application/controllers/estado.php';
     }
+    
+    public function buscar() {
+        $loggedUser = $this->session->userdata('loggedUser');
+        $nome = $loggedUser['nome'];
+        $user = $loggedUser['username'];
+        
+        $CI = $this->get_instance();
+        $CI->load->model('admin_model');
+        $escolas = $CI->admin_model->getEscolas();
+        
+        $data = array('nome' => $nome, 'escolas' => $escolas);
+        $this->load->view('consultasAdmin', $data);
+    }
 
      public function buscaM() {
 
@@ -19,14 +32,12 @@ class Admin extends CI_Controller {
         
         $checkGenero = $_POST['generocheck'];
         $checkFaixa = $_POST['faixaEtariaCheck'];
-        $checkClassificacao = $_POST['classificacaoCheck'];
         $checkEscola = $_POST['escolaCheck'];
         $checkAluno = $_POST['alunoCheck'];
         
         $genero = '*';
         $faixa1 = '*';
         $faixa2 = '*';
-        $classificacao = '*';
         $escola = '*';
         $aluno = '*';
         
@@ -43,10 +54,7 @@ class Admin extends CI_Controller {
             $faixa1 = $_POST['faixa1'];
             $faixa2 = $_POST['faixa2'];
         }
-        
-        if($checkClassificacao){
-            $classificacao = $_POST['classificacao'];
-        }
+       
         
         if($checkEscola){
             $escola = $_POST['escola'];
@@ -57,14 +65,14 @@ class Admin extends CI_Controller {
         }
         
         $data = array('nome' => $nome, 'menus' => $menus, 'cpf' => $cpf, 'genero' => $genero,
-            'faixa1' => $faixa1, 'faixa2' => $faixa2, 'classificacao' => $classificacao,
+            'faixa1' => $faixa1, 'faixa2' => $faixa2,
             'escola' => $escola, 'aluno' => $aluno);
 
         $CI = $this->get_instance();
         $CI->load->model('admin_model');
-        $result = $CI->admin_model->get($data);
-        $data['aval'] = $result;
-        $this->load->view('mostra_professor', $data);
+        $result = $CI->admin_model->getAvaliacoes($data);
+        $data1 = array( 'avaliacoes' => $result);
+        $this->load->view('mostra_avaliacao', $data1);
     }
     
     

@@ -13,12 +13,12 @@ class Professor extends CI_Controller {
         $nome = $loggedUser['nome'];
         $user = $loggedUser['user'];
 
-
-        $menu = new Menu();
-        $menus = $menu->getMenus($user);
+        $CI = $this->get_instance();
+        $CI->load->model('admin_model');
+        $escolas = $CI->admin_model->getEscolas($user);
         $estado = new Estado();
         
-        $data = array('nome' => $nome, 'menus' => $menus,'estados' => $estado->getEstados());
+        $data = array('nome' => $nome, 'estados' => $estado->getEstados(), 'escolas' => $escolas);
         $this->load->view('cadastro_professor', $data);
     }
     
@@ -27,32 +27,31 @@ class Professor extends CI_Controller {
             $data = array();
             $data['nome'] = $_POST['nome'];
             $data['cpf'] = $_POST['cpf'];
-            $data['senha'] = $_POST['senha'];
             $data['email'] = $_POST['email'];
-            $data['idEscola'] = $_POST['escolas'];
+            $data['escola'] = $_POST['escola'];
             
             $this->load->model('Professor_model');
             $result = $this->Professor_model->doAddProfessor($data);
             
-            
-            
             $loggedUser = $this->session->userdata('loggedUser');
             $nome = $loggedUser['nome'];
             $user = $loggedUser['user'];
-            $menu = new Menu();
-            $menus = $menu->getMenus($user);
 
-            $data2 = array('nome' => $nome, 'menus' => $menus);
+            $data2 = array('nome' => $nome);
 
             if (isset($result['error'])) {
                 $data2['result'] = $result['error'];
             }else{
                 $data2['result'] = $result['success'];
+                $t = "Sua senha é: ".$result['success'];
+                echo "<script>alert('$t')</script>";
             }
             
-            $this->load->view('result_cadastro_escola',$data2);
+            
+            $this->load->view('cadastro_professor',$data2);
         }
     }
+    
     
     public function remover(){
         $this->load->view('removerProfessorAdmin');
@@ -128,10 +127,6 @@ class Professor extends CI_Controller {
             $faixa2 = $_POST['faixa2'];
         }
         
-        if(isset($_POST['checkClassificacao'])){
-            $classificacao = $_POST['classificacao'];
-        }
-        
         if(isset($_POST['checkEscola'])){
             $escola = $_POST['escola'];
         }
@@ -147,8 +142,8 @@ class Professor extends CI_Controller {
         $CI = $this->get_instance();
         $CI->load->model('professor_model');
         $result = $CI->professor_model->get($data);
-        $data['aval'] = $result;
-        $this->load->view('mostraTudo_professor', $data);
+        $data1 = array('avaliacoes' => $result);
+        $this->load->view('consultasGraficos', $data1);
     }
     
     /*public function buscarGenero() {

@@ -34,7 +34,7 @@
               <li><?php echo anchor('welcome/downloads', 'Downloads');?></li>
               <li><?php echo anchor('welcome/contatos', 'Contatos');?></li>
             </ul>
-            <li><?php echo anchor('login/logout', 'Logout');?></li>
+            <li><?php echo anchor('login/logout', '<div class="btn">Logout</div>');?></li>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -88,6 +88,17 @@
                          
                        </div>
                      </div>
+                     
+                     <div class="control-group">
+                         <label class="control-label" for="Escola">Escolas</label>
+                          <div class="controls" margin:0 0 0 105px;">
+                            <select id="escolaSelect" name="escola" class="input-xlarge">
+                                <?php foreach ($escolas as $escola): ?>
+                                    <option><?php echo $escola; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                          </div>
+                        </div>
                      
                      <!-- Button -->
                      <div class="control-group">

@@ -34,7 +34,7 @@
               <li><?php echo anchor('welcome/downloads', 'Downloads');?></li>
               <li><?php echo anchor('welcome/contatos', 'Contatos');?></li>
             </ul>
-            <li><?php echo anchor('login/logout', 'Logout');?></li>
+            <li><?php echo anchor('login/logout', '<div class="btn">Logout</div>');?></li>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -46,7 +46,7 @@
           <div class="bemvindo"><h4>Bem vindo, Admin</h4></div>
           <div class="well sidebar-nav">
             <ul class="nav nav-tabs nav-stacked">
-              <li><?php echo anchor('admin/consulta', 'Consultas');?></li>
+              <li><?php echo anchor('admin/buscar', 'Consultas');?></li>
               <li><?php echo anchor('professor/cadastro', 'Cadastro de Professor');?></li>
               <li><?php echo anchor('escola/cadastro', 'Cadastro de Escola');?></li>
               <li><?php echo anchor('professor/remover', 'Remover Professor');?></li>
@@ -58,7 +58,7 @@
                <div class="row-fluid1">
                   <form class="form-horizontal">
                      
-                     <form method="POST" action="<?php echo base_url();?>admin/buscaM">
+                     <form class="form-horizontal" method="POST" action="<?php echo base_url();?>admin/buscaM">
                         <fieldset>
                         
                         <!-- Form Name -->
@@ -111,22 +111,6 @@
                           </div>
                         </div>
                         
-                        <!-- Multiple Checkboxes -->
-                        <div class="control-group">
-                          <label class="control-label" for="classificacaoCheck"></label>
-                          <div class="controls" style="float:left; margin-left:20px;">
-                            <label class="checkbox" for="classificacaoCheck-0">
-                              <input type="checkbox" name="classificacaoCheck" id="classificacaoCheck-0" value="Classificação">
-                              Classificação
-                            </label>
-                          </div>
-                          <div class="controls" style="float:left; margin:0 0 0 65px;">
-                            <select id="classificacaoSelect" name="classificacaoSelect" class="input-xlarge">
-                              <option>Normal</option>
-                            </select>
-                          </div>
-                        </div>
-                        
                     
                         
                         <!-- Multiple Checkboxes -->
@@ -140,33 +124,19 @@
                           </div>
                           <div class="controls" style="float:left; margin:0 0 0 105px;">
                             <select id="escolaSelect" name="escolaSelect" class="input-xlarge">
-                              <option>Escola 1</option>
+                                <?php foreach ($escolas as $escola): ?>
+                                    <option><?php echo $escola; ?></option>
+                                <?php endforeach; ?>
                             </select>
                           </div>
                         </div>
-                        
-                        <!-- Multiple Checkboxes -->
-                        <div class="control-group">
-                          <label class="control-label" for="alunoCheck"></label>
-                          <div class="controls" style="float:left; margin-left:20px;">
-                            <label class="checkbox" for="alunoCheck-0">
-                              <input type="checkbox" name="alunoCheck" id="alunoCheck-0" value="Aluno">
-                              Aluno
-                            </label>
-                          </div>
-                          <div class="controls" style="float:left; margin:0 0 0 110px;">
-                            <select id="alunoSelect" name="alunoSelect" class="input-xlarge">
-                              <option>Aluno 1</option>
-                              <option>Aluno 2</option>
-                            </select>
-                          </div>
-                        </div>
+              
                         
                        <!-- Button -->
                         <div class="control-group">
                           <label class="control-label" for="consultasButton"></label>
                           <div class="controls">
-                            <input type="submit" value="Consultar" />
+                            <input type="submit" id="consultasButton" name="consultasButton" class="btn" value="Consultar" />
                           </div>
                         </div>
                         

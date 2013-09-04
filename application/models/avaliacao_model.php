@@ -26,6 +26,13 @@ class Avaliacao_model extends CI_Model {
         $quadrado = $dados['quadrado'];
         $corrida = $dados['corrida'];
         $banco = $dados['sentar_alcancar_banco'];
+        $class_sentar = $dados['classificacaoSentarEAlcancar'];
+        $class_abdominal = $dados['classificacaoAbdominal'];
+        $class_arremesso_bola = $dados['classificacaoArremessoMedicineBall'];
+        $class_corrida = $dados['classificacaoCorrida20Metros'];
+        $class_salto = $dados['classificacaoSaltoHorizontal'];
+        $class_quadrado = $dados['classificacaoTesteDoQuadrado'];
+               
 
         $sentar_alcancar_banco = 0;
 
@@ -40,25 +47,29 @@ class Avaliacao_model extends CI_Model {
             $row = mysqli_fetch_array($result1);
             if ($row[0] != NULL) {
                 $error = array('error' => 'Avaliacao ja existente no banco de dados <br>', 'idAvaliacao' => $row['numAvaliacao']);
-                return $error;
+                //return $error;
             }
         } else {
             $error = array('error' => "Erro no select Avaliacao <br>");
-            return $error;
+            //return $error;
         }
+        
         $result = mysqli_query($this->dbc->getLink(), "INSERT INTO Avaliacao(Aluno_idAluno, numAvaliacao, data,
                 horario, temperatura, massaCorporal, estatura, imc,
                 envergadura, sentarEAlcancar, sentarEAlcancarComBanco, 
                 abdominal, _9Minutos, _6Minutos, saltoHorizontal, 
-                arremessoMedicineBall, testeDoQuadrado, corrida20Metros)
+                arremessoMedicineBall, testeDoQuadrado, corrida20Metros, classificacaoSentarEAlcancar,
+                classificacaoAbdominal, classificacaoArremessoMedicineBall,classificacaoCorrida20Metros,
+                classificacaoSaltoHorizontal, classificacaoTesteDoQuadrado)
                 VALUES ($idAluno,$idAvaliacao,'$data','$horario',$temperatura,$massa_corporal,
                     $estatura,$imc,$envergadura,$sentar_alcancar,0,$abdominal,$nove_minutos,$seis_minutos,
-                    $salto_horizontal,$arremesso_bola,$quadrado,$corrida)");
+                    $salto_horizontal,$arremesso_bola,$quadrado,$corrida,'$class_sentar', '$class_abdominal',
+                    '$class_arremesso_bola', '$class_corrida', '$class_salto', '$class_quadrado')");
 
 
         if (!$result) {
             $error = array('error' => 'Erro ao inserir no banco de dados Prodown Avaliacao <br>');
-            return $error;
+            //return $error;
         }
         return true;
     }

@@ -34,7 +34,7 @@
               <li><?php echo anchor('welcome/downloads', 'Downloads');?></li>
               <li><?php echo anchor('welcome/contatos', 'Contatos');?></li>
             </ul>
-            <li><?php echo anchor('login/logout', 'Logout');?></li>
+            <li><?php echo anchor('login/logout', '<div class="btn">Logout</div>');?></li>
           </div><!--/.nav-collapse -->
         </div>
       </div>

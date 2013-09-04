@@ -18,24 +18,21 @@ class Escola extends CI_Controller {
 
         //$CI = $this->get_instance();
         $estado = new Estado();
-
+        
         $data = array('nome' => $nome, 'menus' => $menus, 'estados' => $estado->getEstados());
         $this->load->view('cadastro_escola', $data);
     }
 
     public function add() {
         $this->form_validation->set_rules('nome', 'NOME', 'required|min_length[6]');
+
         //$this->form_validation->set_rules('cnpj', 'CNPJ', 'required|min_length[6]');
         if ($this->form_validation->run() == true) {
-
-            if (isset($_POST['nome'])) {
+			if (isset($_POST['nome'])) {
                 $data = array();
                 $data['nome'] = $_POST['nome'];
-                $data['cnpj'] = $_POST['cnpj'];
-                $data['telefone'] = $_POST['telefone'];
-                $data['email'] = $_POST['email'];
-                $data['idEstado'] = $_POST['estados'];
-                $data['idCidade'] = $_POST['cidades'];
+                $data['idEstado'] = $_POST['estado'];
+                $data['idCidade'] = $_POST['cidade'];
 
                 $this->load->model('Escola_model');
                 $result = $this->Escola_model->doAddEscola($data);
@@ -47,14 +44,11 @@ class Escola extends CI_Controller {
                 $menus = $menu->getMenus($user);
 
                 $data1 = array('nome' => $nome, 'menus' => $menus);
-
-                if (isset($error['error'])) {
-                    $data1['result'] = $result['error'];
-                } else {
-                    $data1['result'] = $result['success'];
-                }
-
-                $this->load->view('result_cadastro_escola', $data1);
+                $data1['result'] = $result['msg'];
+				
+				//echo '<script>alert("'.$result['msg'].'")</script>';
+				
+                $this->load->view('cadastro_escola', $data1);
             }
         } else {
             $temp = validation_errors();
@@ -69,13 +63,13 @@ class Escola extends CI_Controller {
             //$CI = $this->get_instance();
             $estado = new Estado();
 
-
             $data = array('nome' => $nome, 'menus' => $menus, 'estados' => $estado->getEstados(),
                 'validation' => $temp);
             $this->form_validation->run();
             $this->load->view('cadastro_escola', $data);
         }
     }
+    
     
     public function remover(){
         $this->load->view('removerEscolaAdmin');

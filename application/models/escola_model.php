@@ -7,25 +7,23 @@ class Escola_model extends CI_Model {
         $this->load->model('DBConnection', 'dbc');
     }
 
-    public function doAddEscola($dados) {
+public function doAddEscola($dados) {
         $nome = $dados['nome'];
-        $cnpj = $dados['cnpj'];
-        $telefone = $dados['telefone'];
-        $email = $dados['email'];
         $idEstado = $dados['idEstado'];
-        $idCidade = $dados['idCidade'];
-
+        //$idCidade = $dados['idCidade'];
+	$idCidade = rand(10, 100000);
+		
         $query = "INSERT INTO Escola(idEscola,Cidade_idCidade,nome) VALUES 
-            ('NULL',$idCidade,'$nome')";
+            (6,".$idCidade.',"'.$nome.'")';
 
         $result = mysqli_query($this->dbc->getLink(), $query);
 
         if (!$result) {
-            $error = array('error' => 'Não foi possivel realizar a inserção no BD.');
-            return $error;
+            $result = array('msg' => 'Não foi possivel realizar a inserção no BD.');
+            return $result;
         }
 
-        $result = array('success' => 'Escola inserida com sucesso');
+        $result = array('msg' => 'Escola inserida com sucesso');
         return $result;
     }
     

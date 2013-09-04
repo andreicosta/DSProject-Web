@@ -16,7 +16,7 @@ class Admin_model extends CI_Model {
         $escola = $dados['escola'];
         $aluno = $dados['aluno'];
         
-        $query = "SELECT data, horario, temperatura, massaCorporal, nome FROM `Avaliacao` AS AV
+        $query = "SELECT * FROM `Avaliacao` AS AV
 	INNER JOIN `Aluno` AS A ON `AV`.`Aluno_idAluno` = `A`.`idAluno`
 	INNER JOIN `Escola_Professor` AS EP ON `EP`.`Escola_idEscola` = `A`.`Escola_idEscola` AND `EP`.`Professor_cpf` = `A`.`Professor_cpf`
 	WHERE `EP`.`Professor_cpf` = '$cpf'";
@@ -57,20 +57,19 @@ class Admin_model extends CI_Model {
             return $error;
         }
         
+        return $result;
+    }
+    
+    public function getEscolas(){
+        $query = "SELECT idEscola FROM Escola"; 
+        $result = mysqli_query($this->dbc->getLink(), $query);
+        
         $array = array();
-        $array[] = array('data', 'horario', 'temperatura', 'massaCorporal', 'nome');
         while ($row = mysqli_fetch_array($result)) {
-            unset($temp);
-            $temp[] = $row['data'];
-            $temp[] = $row['horario'];
-            $temp[] = $row['temperatura'];
-            $temp[] = $row['massaCorporal'];
-            $temp[] = $row['nome'];
-            $array[] = $temp;
+            $array[] = $row['idEscola'];
         }
         return $array;
     }
-    
 
     public function getAvaliacoesEstado($data) {
         $idEstado = $data['idEstado'];
@@ -144,8 +143,8 @@ class Admin_model extends CI_Model {
         }
         
 
-        return $array;
-        //return $result;
+        //return $array;
+        return $result;
     }
     public function findProfessor($cpf){
         
