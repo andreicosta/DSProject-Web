@@ -19,12 +19,16 @@ class Escola_model extends CI_Model {
 
     public function doAddEscola($dados) {
         $nome = $dados['nome'];
-        $idCidade = $dados['idCidade'];
-		$idEscola = rand(10, 100000);
-        
-        $query = "INSERT INTO Escola(idEscola,Cidade_idCidade,nome) VALUES ($idEscola,1,\"$nome\")";
+        $cidade = $dados['cidade'];
+	$idEscola = rand(10, 100000);
 
-		$result = mysqli_query($this->dbc->getLink(), $query);
+	$result = mysqli_query($this->dbc->getLink(), "SELECT * FROM Cidade WHERE nome = '$cidade'");
+	$row = mysqli_fetch_array($result);
+	$idCidade = $row['idCidade'];
+		
+        $query = "INSERT INTO Escola(idEscola,Cidade_idCidade,nome) VALUES ($idEscola,$idCidade,\"$nome\")";
+
+	$result = mysqli_query($this->dbc->getLink(), $query);
 
         if (!$result) {
             $error = array('error' => 'Não foi possivel realizar a inserção da Escola no BD.');
