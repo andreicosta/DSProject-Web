@@ -71,27 +71,23 @@
                        </div>
                      </div>
                      
-                     <!-- Select Basic -->
-                     <div class="control-group">
-                       <label class="control-label" for="estado">Estado</label>
-                       <div class="controls">
-                         <select id="estado" name="estado" class="input-xlarge">
-                           <option>Rio Grande do Sul</option>
-                           <option>Santa Catarina</option>
-                         </select>
-                       </div>
-                     </div>
-                     
-                     <!-- Select Basic -->
-                     <div class="control-group">
-                       <label class="control-label" for="cidade">Cidade</label>
-                       <div class="controls">
-                         <select id="cidade" name="cidade" class="input-xlarge">
-                           <option>Cidade 1</option>
-                           <option>Cidade 2</option>
-                         </select>
-                       </div>
-                     </div>
+                     <script type="text/javascript" src="http://cidades-estados-js.googlecode.com/files/cidades-estados-v0.2.js"></script>
+						<script type="text/javascript">
+							window.onload = function() {
+								new dgCidadesEstados(
+									document.getElementById('estado'),
+									document.getElementById('cidade'),
+									true
+								);
+							}
+					</script>
+
+					<form method="post">
+						<fieldset>
+							<label>Estado</label><select id="estado" name="estado"></select>
+							<label>Cidade</label><select id="cidade" name="cidade"></select>
+						</fieldset>
+					</form>
                      
                      <!-- Button -->
                      <div class="control-group">
