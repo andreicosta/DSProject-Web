@@ -477,6 +477,76 @@
                          }
                        </script>
                        
+                       <style type='text/css'>
+                            .center-text {
+                                border:1px;
+                                text-align: center;
+                            }
+
+
+                       </style>
+
+                       
+                       <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+                       <script type='text/javascript'>
+                           
+
+                            google.load('visualization', '1.0', {packages:['table']});
+
+                            google.setOnLoadCallback(drawTable);
+                            
+                            function drawTable() {
+                                
+                            
+                            var data = new google.visualization.arrayToDataTable([
+                            ['Aluno', 'Avaliacao', 'Data', 'Horario', 'Temperatura', 'Massa Corporal', 'Estatura', 
+                             'IMC', 'Envergadura', 'Sentar E Alcancar', 'Com Banco', 'Abdominal', 'Corrida 9 min',
+                             'Corrida 6 min', 'Salto Horizontal', 'Arremesso', 'Quadrado', 'Corrida 20 Metros']
+                             
+                             <?php
+                                
+                                $avaliacoes->data_seek(0);
+
+                                while($row = $avaliacoes->fetch_object())
+                                {
+
+                                 echo ",[{$row->Aluno_idAluno}, 
+                                     '{$row->numAvaliacao}', 
+                                     '{$row->data}', 
+                                     '{$row->horario}', 
+                                     '{$row->temperatura}', 
+                                     '{$row->massaCorporal}', 
+                                     '{$row->estatura}', 
+                                     '{$row->imc}', 
+                                     '{$row->envergadura}', 
+                                     '{$row->sentarEAlcancar}', 
+                                     '{$row->sentarEAlcancarComBanco}',
+                                     '{$row->abdominal}', 
+                                     '', 
+                                     '', 
+                                     '{$row->saltoHorizontal}', 
+                                     '{$row->arremessoMedicineBall}', 
+                                     '{$row->testeDoQuadrado}', 
+                                     '{$row->corrida20Metros}']\r\n";   
+                                }
+                                
+                            ?>
+                            
+                            ]);
+                            
+                            var cssClassNames = {
+                                'tableCell': 'center-text',};
+
+                            var options = {'allowHtml': true, 'cssClassNames': cssClassNames};
+                            
+                            var table = new google.visualization.Table(document.getElementById('table_div'));
+                            table.draw(data, options);
+                            
+                        }
+                        
+                        
+                        </script>
+
                        <center>
                        <div>
                        <div class="span6" id="chart_div_1"></div>
@@ -489,6 +559,12 @@
                        <div>
                        <div class="span6" id="chart_div_5"></div>
                        <div class="span6" id="chart_div_6"></div>
+                       </div>
+                       <div>
+                       <div class="span6" id="table_div">
+}
+                           
+                       </div>
                        </div>
                        </center>
                   </form>
