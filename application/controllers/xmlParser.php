@@ -138,7 +138,10 @@ class XMLParser extends CI_Controller {
     }
     
     public function genClassificacao($genero, $idade, $teste, $valor) {
-        //echo  $idade -> diff(new DateTime('YYYY-MM-DD')) -> y, 'years';
+        $date = new DateTime($idade);
+        $now = new DateTime();
+
+        $idade = $date->diff($now)->format("%Y");
                 
         $tab_masc_abdominal = array(array(8, 11, 14, 17), //10
                                     array(9, 12, 15, 18), //11
