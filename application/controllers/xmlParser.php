@@ -328,35 +328,35 @@ class XMLParser extends CI_Controller {
         
         $t_g = $g[$genero];
         $t_t = $t[$teste];
-        //$t_i = $i[$idade];
+        $t_i = $i[$idade];
         
         
         $class = 'Otimo';
         if ($s[$teste] == 0){
-            if ($valor <= $tabs[$t_t][$t_g][0][0]){
+            if ($valor <= $tabs[$t_t][$t_g][$t_i][0]){
                 $class = 'Fraco';
             }
-            elseif ($valor <= $tabs[$t_t][$t_g][0][1]){
+            elseif ($valor <= $tabs[$t_t][$t_g][$t_i][1]){
                 $class = 'Razoavel';
             }
-            elseif ($valor <= $tabs[$t_t][$t_g][0][2]){
+            elseif ($valor <= $tabs[$t_t][$t_g][$t_i][2]){
                 $class = 'Bom';
             }
-            elseif ($valor <= $tabs[$t_t][$t_g][0][3]){
+            elseif ($valor <= $tabs[$t_t][$t_g][$t_i][3]){
                 $class = 'Muito Bom';
             }
         }
         else{
-            if ($valor >= $tabs[$t_t][$t_g][0][0]){
+            if ($valor >= $tabs[$t_t][$t_g][$t_i][0]){
                 $class = 'Fraco';
             }
-            elseif ($valor >= $tabs[$t_t][$t_g][0][1]){
+            elseif ($valor >= $tabs[$t_t][$t_g][$t_i][1]){
                 $class = 'Razoavel';
             }
-            elseif ($valor >= $tabs[$t_t][$t_g][0][2]){
+            elseif ($valor >= $tabs[$t_t][$t_g][$t_i][2]){
                 $class = 'Bom';
             }
-            elseif ($valor >= $tabs[$t_t][$t_g][0][3]){
+            elseif ($valor >= $tabs[$t_t][$t_g][$t_i][3]){
                 $class = 'Muito Bom';
             }
         }
